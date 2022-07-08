@@ -1,0 +1,29 @@
+name: ProfilsRoadToNincraft
+version: '${project.version}'
+main: fr.soraxdubbing.profilsroadtonincraft.ProfilsRoadToNincraft
+depend: [ Vault,Essentials ]
+authors: [ SoraxDubbing ]
+description: Profils pour les utilisateurs de RoadToNincraft
+commands:
+  profils:
+    description: permet de voir les profils
+    default: op
+    permission: rtn.profils
+    usage: /profils
+    aliases:
+      - Profils
+      - profils
+  profil:
+    description: permet de manager son profil actuel
+    default: op
+    permission: rtn.profil
+    usage: /profil
+    aliases:
+      - profil
+  admin:
+    description: permet de manager les profils
+    default: op
+    permission: rtn.admin
+    usage: /admin
+    aliases:
+      - admin
