@@ -54,15 +54,6 @@ public class ProfilCommand implements CommandExecutor {
                             case "date":
                                 player.sendMessage("[§aProfil§r] §aDate de création du profil: " + user.getActualProfil().getDateString());
                                 break;
-                            case "location":
-                                player.sendMessage("[§aProfil§r] §a" + "x: "+user.getActualProfil().getLastLocation().getX() + " y: "+user.getActualProfil().getLastLocation().getY() + " z: "+user.getActualProfil().getLastLocation().getZ());
-                                break;
-                            case "hp":
-                                player.sendMessage("[§aProfil§r] §aVie max du profil: " + user.getActualProfil().getMaximumHealth());
-                                break;
-                            case "food":
-                                player.sendMessage("[§aProfil§r] §aFood du profil: " + user.getActualProfil().getFoodLevel());
-                                break;
                             default:
                                 player.sendMessage("§c/profil get <name,date,location,hp,food>");
                                 break;

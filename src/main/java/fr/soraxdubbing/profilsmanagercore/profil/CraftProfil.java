@@ -18,31 +18,12 @@ import java.util.*;
 public class CraftProfil {
     private transient List<AddonData> addons;
     private String name;
-    private List<String> enderChest;
-    private List<String> inventory;
     private final String date;
-    private double maximumHealth;
-    private double actualHealth;
-    private int foodLevel;
-    private int x;
-    private int y;
-    private int z;
-    private float yaw;
-    private float pitch;
-    private String world;
-    private GameMode gameMode;
     private double money;
     private List<String> permission;
 
     public CraftProfil(String name) {
         this.name = name;
-        this.enderChest = new ArrayList<>();
-        this.inventory = new ArrayList<>();
-        this.maximumHealth = 20;
-        this.actualHealth = 20;
-        this.foodLevel = 20;
-        this.setLastLocation(Bukkit.getServer().getWorld("world").getSpawnLocation());
-        this.gameMode = GameMode.SURVIVAL;
         this.money = 0;
         this.date = LocalDate.now().toString();
         this.permission = new ArrayList<>();
@@ -51,14 +32,7 @@ public class CraftProfil {
 
     public CraftProfil(CraftProfil profil, String name) {
         this.name = name;
-        this.inventory = ItemManager.ItemStackToStringList(profil.getInventory());
         this.date = LocalDate.now().toString();
-        this.setLastLocation(profil.getLastLocation());
-        this.actualHealth = profil.getActualHealth();
-        this.maximumHealth = profil.getMaximumHealth();
-        this.gameMode = profil.getGameMode();
-        this.foodLevel = profil.getFoodLevel();
-        this.enderChest = ItemManager.ItemStackToStringList(profil.getEnderChest());
         this.money = profil.getMoney();
         this.permission = profil.getPermission();
         this.addons = profil.getAddons();
@@ -72,67 +46,8 @@ public class CraftProfil {
         this.name = name;
     }
 
-    public ItemStack[] getInventory() {
-        return ItemManager.StringListToItemStack(this.inventory);
-    }
-
-    public void setInventory(ItemStack[] inventory) {
-        this.inventory = ItemManager.ItemStackToStringList(inventory);
-    }
-
-    public  ItemStack[] getEnderChest() {
-        return ItemManager.StringListToItemStack(this.enderChest);
-    }
-    public  void setEnderChest(ItemStack[] inventory) {
-        this.enderChest = ItemManager.ItemStackToStringList(inventory);
-    }
-
     public String getDate() {
         return date;
-    }
-
-    public double getMaximumHealth() {
-        return maximumHealth;
-    }
-
-    public void setMaximumHealth(double maximumHealth) {
-        this.maximumHealth = maximumHealth;
-    }
-
-    public double getActualHealth() {
-        return actualHealth;
-    }
-
-    public void setActualHealth(double actualHealth) {
-        this.actualHealth = actualHealth;
-    }
-
-    public int getFoodLevel() {
-        return foodLevel;
-    }
-
-    public void setFoodLevel(int foodLevel) {
-        this.foodLevel = foodLevel;
-    }
-
-    public void setLastLocation(Location location){
-        this.x = location.getBlockX();
-        this.y = location.getBlockY();
-        this.z = location.getBlockZ();
-        this.yaw = location.getYaw();
-        this.pitch = location.getPitch();
-        this.world = location.getWorld().getName();
-    }
-    public Location getLastLocation(){
-        return new Location(Bukkit.getWorld(this.world), this.x, this.y, this.z, this.yaw, this.pitch);
-    }
-
-    public GameMode getGameMode(){
-        return this.gameMode;
-    }
-
-    public void setGameMode(GameMode gameMode){
-        this.gameMode = gameMode;
     }
 
     public void setMoney(double money){
@@ -157,12 +72,7 @@ public class CraftProfil {
 
     @Override
     public String toString() {
-        StringBuilder list = new StringBuilder("§a§lStatistics: " + '\n' +
-                "§7" + getMaximumHealth() + " §c❤§r " + "| §b" + getMoney() + " $" + '\n' +
-                "§7§lx: §r§3" + x + " §7§ly: §r§3" + y + " §7§lz: §r§3" + z + '\n' +
-                "§6" + getDateString() + '\n' +
-                "§eGamemode " + getGameMode() + '\n' +
-                "§a§lPermissions: " + '\n');
+        StringBuilder list = new StringBuilder();
 
         String perm = "§7";
         for (String s : getPermission()) {
@@ -183,25 +93,6 @@ public class CraftProfil {
     public void UpdateProfil(Player player, ProfilsManagerCore plugin){
         ProfilUpdateEvent event = new ProfilUpdateEvent(player,this);
         Bukkit.getPluginManager().callEvent(event);
-        this.setLastLocation(player.getLocation());
-
-        ItemStack[] inventory = player.getInventory().getContents();
-        if (inventory != null) {
-            this.setInventory(inventory);
-        }
-
-        ItemStack[] enderchest = player.getEnderChest().getContents();
-        if (enderchest != null) {
-            this.setEnderChest(enderchest);
-        }
-
-        this.setActualHealth(player.getHealth());
-
-        this.setMaximumHealth(player.getMaxHealth());
-
-        this.setGameMode(player.getGameMode());
-
-        this.setFoodLevel(player.getFoodLevel());
 
         this.setMoney(plugin.getEconomy().getBalance(player));
 
@@ -228,25 +119,8 @@ public class CraftProfil {
         ProfilLoadedEvent event = new ProfilLoadedEvent(player,this);
         Bukkit.getPluginManager().callEvent(event);
 
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(this.getMaximumHealth());
-        player.setHealth(this.getActualHealth());
-
-        ItemStack[] inventory = this.getInventory();
-        if (inventory != null) {
-            player.getInventory().setContents(inventory);
-        }
-
-        ItemStack[] enderchest = this.getEnderChest();
-        if (enderchest != null) {
-            player.getEnderChest().setContents(enderchest);
-        }
-        player.teleport(this.getLastLocation());
-        player.setFoodLevel(this.getFoodLevel());
-
         plugin.getEconomy().withdrawPlayer(player, plugin.getEconomy().getBalance(player));
         plugin.getEconomy().depositPlayer(player, this.getMoney());
-
-        player.setGameMode(this.getGameMode());
 
         for (String playerGroup : plugin.getPermission().getPlayerGroups(player)) {
             plugin.getLogger().info(playerGroup);
