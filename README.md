@@ -16,6 +16,66 @@ I plan later to port the plugins to a newer version of minecraft.
 
 Work in progress
 
+### Exemple
+
+#### Create an Addon
+
+```java
+public class PlayerStats extends AddonData {
+
+    private int level;
+    private int life;
+    private Gamemode gamemode;
+    
+  public PlayerStats(Player player) {
+        super("PlayerStat") // Addon name
+        this.level = player.getLevel();
+        this.life = player.getMaxLife();
+        this.gamemode = player.getGamemode();
+    }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("§a§lPlayerStat:§r").append("\n");
+        sb.append("§2level:§r ").append(this.level).append("\n");
+        sb.append("§2life:§r ").append(this.life).append("\n");
+        sb.append("§gamemode:§r ").append(this.gamemode).append("\n");
+        return sb.toString();
+    }
+
+    @Override
+    public void updateAddonData(Player player, JavaPlugin javaPlugin) {
+        this.level = player.getLevel();
+        this.life = player.getMaxLife();
+        this.gamemode = player.getGamemode();
+    }
+
+    @Override
+    public void loadAddonData(Player player, JavaPlugin javaPlugin) {
+        player.setMaxLife(this.life);
+        player.setLevel(this.level);
+        player.setGamemode(this.gamemode);
+    }
+}
+
+```
+
+#### Register your Addon
+
+```java
+public class RegisterAddon implements Listener {
+
+    @EventHandler
+    public void registerAddon(AddonRegisterEvent event){
+        if(!event.getData().containsClass(PlayerStats.class)){
+            event.registerAddon(PlayerStats.class);
+            System.out.println("Registering addon");
+        }
+    }
+}
+```
+
 ### JavaDocs
 
 Work in progress
