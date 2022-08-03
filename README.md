@@ -6,14 +6,10 @@
 
 # Profils Manager Core
 
-Minecraft Plugins in 1.12.2 which allows you to list the spells you have created for the MagicSpells Plugin.
-It gives you the number of spells and their names in a text file located in the plugin folder.
+ProfilsManagerCore is a Bukkit/Spigot/Paper minecraft plugin allowing players to have multiple game profiles on the same server, goodbye second account and welcome to Profiles! Only this plugin is useless it's an API so it requires addons to be useful.
 
-
-## Authors
-
-- [@SoraxDubbing](https://www.github.com/Sorax5)
-
+When I will finish and pauffine the api I will publish some addon examples.
+I plan later to port the plugins to a newer version of minecraft.
 
 ## Demo
 
@@ -25,4 +21,8 @@ Insert gif or link to demo
 This project is used by the following companies:
 
 - RoadToNincraft - Studio Leblanc
+
+## Authors
+
+- [@SoraxDubbing](https://www.github.com/Sorax5)
 
