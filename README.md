@@ -24,5 +24,5 @@ This project is used by the following companies:
 
 ## Authors
 
-- [@SoraxDubbing](https://www.github.com/Sorax5)
+<a href="https://github.com/sorax5"><img src="[https://avatars.githubusercontent.com/sorax5]" title="sorax5" width="80" height="80"></a>
 
