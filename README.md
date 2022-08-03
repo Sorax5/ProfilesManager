@@ -1,4 +1,4 @@
-<img src="https://repository-images.githubusercontent.com/514954448/3d46d9d4-eacd-4af5-96a3-0c9f7bacf0e4" text-align="center"><img>
+<img src="https://repository-images.githubusercontent.com/514954448/3d46d9d4-eacd-4af5-96a3-0c9f7bacf0e4" align="center"><img>
 
 
 ![Logo]()
