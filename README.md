@@ -20,13 +20,17 @@ Work in progress
 
 #### Create an Addon
 
+The addons allow you to save information according to the profiles, you have two functions that allow you to save and load the information of the addon if needed.
+
 ```java
 public class PlayerStats extends AddonData {
 
+    // Attribute you want to seperate by Profiles
     private int level;
     private int life;
     private Gamemode gamemode;
     
+  // Constructor of the Class
   public PlayerStats(Player player) {
         super("PlayerStat") // Addon name
         this.level = player.getLevel();
@@ -62,6 +66,8 @@ public class PlayerStats extends AddonData {
 ```
 
 #### Register your Addon
+
+To save the addon, the plugin must know the class used, so use this event to save the class.
 
 ```java
 public class RegisterAddon implements Listener {
