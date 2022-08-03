@@ -20,7 +20,7 @@ Insert gif or link to demo
 
 This project is used by the following companies:
 
-- RoadToNincraft - Studio Leblanc
+<a href="https://github.com/Studio-Leblanc-RoadToNincraft"><img src="https://avatars.githubusercontent.com/Studio-Leblanc-RoadToNincraft" title="RoadToNincraft" width="80" height="80"></a>
 
 ## Authors
 
