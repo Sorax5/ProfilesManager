@@ -15,6 +15,10 @@ I plan later to port the plugins to a newer version of minecraft.
 
 Work in progress
 
+### JavaDocs
+
+Work in progress
+
 ## Official Addon
 
 Work in progress
