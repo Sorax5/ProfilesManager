@@ -1,7 +1,4 @@
-<img src="https://repository-images.githubusercontent.com/514954448/3d46d9d4-eacd-4af5-96a3-0c9f7bacf0e4" align="center"><img>
-
-
-![Logo]()
+<img align="right" width="100" height="100" src="[http://www.fillmurray.com/100/100](https://repository-images.githubusercontent.com/514954448/3d46d9d4-eacd-4af5-96a3-0c9f7bacf0e4)">
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
