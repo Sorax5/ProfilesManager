@@ -11,10 +11,17 @@ ProfilsManagerCore is a Bukkit/Spigot/Paper minecraft plugin allowing players to
 When I will finish and pauffine the api I will publish some addon examples.
 I plan later to port the plugins to a newer version of minecraft.
 
+## API
+
+Work in progress
+
+## Official Addon
+
+Work in progress
+
 ## Demo
 
 Insert gif or link to demo
-
 
 ## Used By
 
