@@ -24,5 +24,5 @@ This project is used by the following companies:
 
 ## Authors
 
-<a href="https://github.com/sorax5"><img src="[https://avatars.githubusercontent.com/sorax5]" title="sorax5" width="80" height="80"></a>
+<a href="https://github.com/sorax5"><img src="https://avatars.githubusercontent.com/sorax5" title="sorax5" width="80" height="80"></a>
 
