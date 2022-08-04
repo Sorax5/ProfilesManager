@@ -31,6 +31,9 @@ Work in progress
 
 ### Exemple
 
+#### ProfilsPlayerStatistics
+https://github.com/Sorax5/ProfilsPlayerStatistics
+
 #### Create an Addon
 
 The addons allow you to save information according to the profiles, you have two functions that allow you to save and load the information of the addon if needed.
