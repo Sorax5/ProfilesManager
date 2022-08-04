@@ -38,6 +38,7 @@ public class PlayerStats extends AddonData {
         this.gamemode = player.getGamemode();
     }
     
+    // use in /profils command to give informations about your addon
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -48,6 +49,7 @@ public class PlayerStats extends AddonData {
         return sb.toString();
     }
 
+    // call when The actual profil is save or juste update
     @Override
     public void updateAddonData(Player player, JavaPlugin javaPlugin) {
         this.level = player.getLevel();
@@ -55,6 +57,7 @@ public class PlayerStats extends AddonData {
         this.gamemode = player.getGamemode();
     }
 
+   // call when the profils is loaded by the player
     @Override
     public void loadAddonData(Player player, JavaPlugin javaPlugin) {
         player.setMaxLife(this.life);
@@ -80,6 +83,20 @@ public class RegisterAddon implements Listener {
         }
     }
 }
+```
+
+#### ItemManager
+
+This class allows you to transform items into String for serialization, the methods are static and I used them originally to save the inventories of the players, so I let you these methods at your disposal.
+
+```java
+public static String ItemStackToStringByte(ItemStack itemStack)
+
+public static ItemStack StringByteToItemStack(String encodedObject)
+
+public static List<String> ItemStackToStringList(ItemStack[] itemStack)
+
+public static ItemStack[] StringListToItemStack(List<String> encodedObject)
 ```
 
 ### JavaDocs
