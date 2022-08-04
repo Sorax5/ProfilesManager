@@ -19,6 +19,15 @@ I plan later to port the plugins to a newer version of minecraft.
 ## API
 
 Work in progress
+### Maven Artifact Package
+
+```xml
+<dependency>
+  <groupId>fr.soraxdubbing</groupId>
+  <artifactId>profilsmanagercore</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</dependency>
+```
 
 ### Exemple
 
