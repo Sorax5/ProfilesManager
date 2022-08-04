@@ -1,9 +1,11 @@
-<p align="center">
+<div align="center">
   <img width="248" height="248" src="https://repository-images.githubusercontent.com/514954448/3d46d9d4-eacd-4af5-96a3-0c9f7bacf0e4">
-</p>
-
+  
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![](https://img.shields.io/bstats/servers/15930?label=bStats)](https://bstats.org/plugin/bukkit/ProfilsManagerCore/15930)
+[![](https://img.shields.io/github/stars/Sorax5/ProfilsManagerCore.svg?label=Stars&logo=github)](https://github.com/Sorax5/ProfilsManagerCore/stargazers)
 
+</div>
 
 # ProfilsManagerCore
 
@@ -11,6 +13,8 @@ ProfilsManagerCore is a Bukkit/Spigot/Paper minecraft plugin allowing players to
 
 When I will finish and pauffine the api I will publish some addon examples.
 I plan later to port the plugins to a newer version of minecraft.
+
+[![](https://bstats.org/signatures/bukkit/ProfilsManagerCore.svg)](https://bstats.org/plugin/bukkit/ProfilsManagerCore/15930)
 
 ## API
 
