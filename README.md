@@ -113,8 +113,6 @@ Insert gif or link to demo
 
 ## Used By
 
-This project is used by the following companies:
-
 <a href="https://github.com/Studio-Leblanc-RoadToNincraft"><img src="https://avatars.githubusercontent.com/Studio-Leblanc-RoadToNincraft" title="RoadToNincraft" width="80" height="80"></a>
 
 ## Authors
