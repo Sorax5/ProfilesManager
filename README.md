@@ -16,6 +16,10 @@ I plan later to port the plugins to a newer version of minecraft.
 
 [![](https://bstats.org/signatures/bukkit/ProfilsManagerCore.svg)](https://bstats.org/plugin/bukkit/ProfilsManagerCore/15930)
 
+## Official Addon
+### ProfilsPlayerStatistics
+https://github.com/Sorax5/ProfilsPlayerStatistics
+
 ## API
 
 Work in progress
@@ -30,9 +34,6 @@ Work in progress
 ```
 
 ### Exemple
-
-#### ProfilsPlayerStatistics
-https://github.com/Sorax5/ProfilsPlayerStatistics
 
 #### Create an Addon
 
@@ -86,7 +87,7 @@ public class PlayerStats extends AddonData {
 
 #### Register your Addon
 
-To save the addon, the plugin must know the class used, so use this event to save the class.
+You must specify to the API the class that implements the abstract class AddonData, otherwise the information of your addon will not be saved because the API does not recognize your addon.
 
 ```java
 public class RegisterAddon implements Listener {
@@ -103,7 +104,7 @@ public class RegisterAddon implements Listener {
 
 #### ItemManager
 
-This class allows you to transform items into String for serialization, the methods are static and I used them originally to save the inventories of the players, so I let you these methods at your disposal.
+This class allows you to transform items into String for serialization, the methods are static and I used them originally to save the inventories of the players, so I let you these methods at your disposal.(work with modded item)
 
 ```java
 public static String ItemStackToStringByte(ItemStack itemStack)
