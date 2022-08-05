@@ -120,10 +120,6 @@ public static ItemStack[] StringListToItemStack(List<String> encodedObject)
 
 Work in progress
 
-## Official Addon
-
-Work in progress
-
 ## Demo
 
 Insert gif or link to demo
