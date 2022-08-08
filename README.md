@@ -64,7 +64,7 @@ public class PlayerStats extends AddonData {
         sb.append("§a§lPlayerStat:§r").append("\n");
         sb.append("§2level:§r ").append(this.level).append("\n");
         sb.append("§2life:§r ").append(this.life).append("\n");
-        sb.append("§gamemode:§r ").append(this.gamemode).append("\n");
+        sb.append("§2gamemode:§r ").append(this.gamemode).append("\n");
         return sb.toString();
     }
 
