@@ -19,6 +19,8 @@ I plan later to port the plugins to a newer version of minecraft.
 ## Official Addon
 ### ProfilsPlayerStatistics
 https://github.com/Sorax5/ProfilsPlayerStatistics
+### ProfilsVaultIntegration
+https://github.com/Sorax5/ProfilsVaultIntegration
 
 ## API
 
