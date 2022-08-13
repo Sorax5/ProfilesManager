@@ -94,6 +94,9 @@ public class CraftProfil {
         }
         return addon;
     }
+    public List<AddonData> getAddons(){
+        return this.addons;
+    }
 
     public void addAddon(AddonData addon){
         this.addons.add(addon);
@@ -103,9 +106,6 @@ public class CraftProfil {
         this.addons.remove(addon);
     }
 
-    public List<AddonData> getAddons(){
-        return this.addons;
-    }
 
     public void setAddons(List<AddonData> addons){
         this.addons = addons;
