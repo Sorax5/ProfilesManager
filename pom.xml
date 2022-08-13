@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.soraxdubbing</groupId>
-    <artifactId>ProfilsManagerCore</artifactId>
+    <artifactId>profilsmanagercore</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -84,10 +84,6 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -104,12 +100,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.MilkBowl</groupId>
-            <artifactId>VaultAPI</artifactId>
-            <version>1.7</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>dev.triumphteam</groupId>
             <artifactId>triumph-gui</artifactId>
             <version>3.1.1</version>
@@ -120,4 +110,12 @@
             <version>2.9.0</version>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub ProfilsManagerCore Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/Sorax5/ProfilsManagerCore</url>
+        </repository>
+    </distributionManagement>
 </project>

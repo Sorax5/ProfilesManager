@@ -4,14 +4,10 @@ import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
 import fr.soraxdubbing.profilsmanagercore.Manager.CraftUserManager;
 import fr.soraxdubbing.profilsmanagercore.event.Loader;
 import fr.soraxdubbing.profilsmanagercore.profil.*;
-import net.milkbowl.vault.chat.Chat;
-import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.permission.Permission;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -20,9 +16,6 @@ import java.util.*;
 public final class ProfilsManagerCore extends JavaPlugin {
 
     private List<CraftUser> users;
-    private Economy economy;
-    private Permission permission;
-    private Chat chat;
     private CraftUserManager manager;
     private static ProfilsManagerCore INSTANCE;
 
@@ -39,14 +32,7 @@ public final class ProfilsManagerCore extends JavaPlugin {
         this.saveDefaultConfig();
 
 
-        if (!setupEconomy() ) {
-            this.getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-        }
 
-        setupPermissions();
-        setupChat();
 
         this.manager = new CraftUserManager(userFile.getAbsolutePath(),this);
         this.users = new ArrayList<>();
@@ -98,39 +84,7 @@ public final class ProfilsManagerCore extends JavaPlugin {
         return null;
     }
 
-    private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
-        }
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null) {
-            return false;
-        }
-        economy = rsp.getProvider();
-        return economy != null;
-    }
 
-    private boolean setupChat() {
-        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
-        chat = rsp.getProvider();
-        return chat != null;
-    }
-
-    private boolean setupPermissions() {
-        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
-        permission = rsp.getProvider();
-        return permission != null;
-    }
-
-    public Economy getEconomy() {
-        return economy;
-    }
-    public Permission getPermission() {
-        return permission;
-    }
-    public Chat getChat() {
-        return chat;
-    }
 
 
 

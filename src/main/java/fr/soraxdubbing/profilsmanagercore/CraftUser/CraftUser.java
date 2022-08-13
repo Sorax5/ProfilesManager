@@ -34,12 +34,7 @@ public class CraftUser {
     }
 
     public Boolean HasActualProfil(){
-        if(this.loadedProfil == null){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return this.loadedProfil != null;
     }
     public void setActualProfil(CraftProfil _actualProfil){
         if(!this.HasActualProfil()){
