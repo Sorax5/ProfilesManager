@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="248" height="248" src="https://repository-images.githubusercontent.com/514954448/3d46d9d4-eacd-4af5-96a3-0c9f7bacf0e4">
+  <img width="248" height="248" src="https://raw.githubusercontent.com/Sorax5/ProfilsManagerCore/master/logo.png">
   
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![](https://img.shields.io/bstats/servers/15930?label=bStats)](https://bstats.org/plugin/bukkit/ProfilsManagerCore/15930)
