@@ -31,11 +31,9 @@ public final class ProfilsManagerCore extends JavaPlugin {
         userFile.mkdir();
         this.saveDefaultConfig();
 
-
-
-
         this.manager = new CraftUserManager(userFile.getAbsolutePath(),this);
         this.users = new ArrayList<>();
+
         this.getServer().getPluginManager().registerEvents(new Loader(this), this);
 
         profilsRegister();

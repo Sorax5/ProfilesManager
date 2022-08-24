@@ -26,26 +26,19 @@ public class Loader implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerSpawnLocationEvent e){
-
+    public void onJoin(PlayerLoginEvent e){
         CraftUser user = manager.loadCraftUser(e.getPlayer());
-
-        plugin.getLogger().info(e.getPlayer().getName() + " ajouté à la liste des utilisateurs");
         users.add(user);
 
         if (!user.HasActualProfil() && user.getProfils().size() == 0){
-            plugin.getLogger().info(e.getPlayer().getName() + " n'a aucun profils");
             CraftProfil profil = new CraftProfil("Default");
             user.addProfils(profil);
             user.setActualProfil(profil);
             user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
         }
         else if (!user.HasActualProfil() && user.getProfils().size() > 0){
-            plugin.getLogger().info(e.getPlayer().getName() + " n'a pas de profil actuel");
             user.setActualProfil(user.getProfils().get(0));
         }
-
-        plugin.getLogger().info(e.getPlayer().getName() + " charge le profil actuel");
         user.getActualProfil().LoadingProfil(e.getPlayer(),plugin);
     }
 
@@ -71,24 +64,20 @@ public class Loader implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
-        plugin.getLogger().info(e.getPlayer().getName() + " a quitté le serveur");
         CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
         if(user != null){
             user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
             manager.saveCraftUser(user);
-            plugin.getLogger().info(e.getPlayer().getName() + " a sauvegardé son profil");
             users.remove(user);
         }
     }
 
     @EventHandler
     public void onKick(PlayerKickEvent e){
-        plugin.getLogger().info(e.getPlayer().getName() + " a quitté le serveur");
         CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
         if(user != null){
             user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
             manager.saveCraftUser(user);
-            plugin.getLogger().info(e.getPlayer().getName() + " a sauvegardé son profil");
             users.remove(user);
         }
     }
@@ -96,7 +85,6 @@ public class Loader implements Listener {
 
 
     public void save() {
-        plugin.getLogger().info("Sauvegarde des Users");
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             CraftUser user = plugin.getUser(onlinePlayer.getUniqueId());
             if (user != null) {

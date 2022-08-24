@@ -20,7 +20,7 @@ public class AdminCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (isPlayer(commandSender)) {
+        if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
 
             switch (strings.length) {
@@ -127,10 +127,6 @@ public class AdminCommand implements CommandExecutor {
 
 
         return true;
-    }
-
-    public boolean isPlayer(CommandSender sender){
-        return sender instanceof Player;
     }
 
     public void save(String name,Player player) {

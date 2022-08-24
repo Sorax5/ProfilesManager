@@ -97,36 +97,4 @@ public class CraftUser {
         this.profils.clear();
     }
 
-    /*private List<String> globalPermissions;
-    public List<String> getGlobalPermissions(){
-        return this.globalPermissions;
-    }
-    public void addGlobalPermissions(String _globalPermissions){
-        this.globalPermissions.add(_globalPermissions);
-    }
-    public void removeGlobalPermissions(String _globalPermissions){ this.globalPermissions.remove(_globalPermissions);}*/
-
-    /*
-    public List<String> getAllPermissions(){
-        List<String> allPermissions = new ArrayList<String>();
-        if(this.actualProfil != null){
-            allPermissions.addAll(this.actualProfil.getGroupPermission());
-        }
-        allPermissions.addAll(this.globalPermissions);
-        return allPermissions;
-    }*/
-
-    /*
-    public void setActualProfilPermissions(List<CraftProfil> groups){
-        if (this.actualProfil != null){
-            for (CraftProfil group : groups) {
-                if (this.globalPermissions.contains(group.getName())) {
-                    groups.remove(group);
-                }
-            }
-            this.actualProfil.setGroupPermission(groups);
-        }
-    }*/
-
-
 }

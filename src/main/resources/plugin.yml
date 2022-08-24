@@ -2,6 +2,8 @@ name: ProfilsManagerCore
 version: '${project.version}'
 main: fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore
 authors: [ SoraxDubbing ]
+softdepend:
+  - Essentials
 description: Plugin permettant de gerer des profils par Joueurs
 commands:
   profils:

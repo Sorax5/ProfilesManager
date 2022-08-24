@@ -81,6 +81,7 @@ public class CraftProfil {
         Bukkit.getPluginManager().callEvent(event);
 
         for (AddonData addon : this.getAddons()) {
+            plugin.getLogger().info("Loading addon " + addon.getAddonName());
             addon.loadAddonData(player,plugin);
         }
     }

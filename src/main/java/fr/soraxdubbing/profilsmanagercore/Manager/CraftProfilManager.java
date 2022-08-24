@@ -44,7 +44,7 @@ public class CraftProfilManager {
     }
 
     public void saveCraftProfil(CraftProfil profil, String directory) {
-        Path path = Paths.get(directory + "/" + profil.getName());
+        Path path = Paths.get(directory + "\\" + profil.getName());
         if(!path.toFile().exists()){
             try{
                 Files.createDirectory(path);
@@ -53,14 +53,14 @@ public class CraftProfilManager {
             }
         }
 
-        File file = new File(directory + "/" + profil.getName(), profil.getName() + ".json");
+        File file = new File(directory + "\\" + profil.getName(), profil.getName() + ".json");
         String json = serialize.serialize(profil);
         FileUtils.save(file,json);
-        addonDataManager.saveAddonDatas(profil.getAddons(), directory + "/" + profil.getName());
+        addonDataManager.saveAddonDatas(profil.getAddons(), directory + "\\" + profil.getName());
     }
 
     public void saveCraftProfils(List<CraftProfil> profils, String directory) {
-        Path path = Paths.get(directory + "/profils");
+        Path path = Paths.get(directory + "\\" +"profils");
         if(!path.toFile().exists()){
             try{
                 Files.createDirectory(path);
