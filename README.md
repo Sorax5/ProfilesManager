@@ -48,10 +48,10 @@ The addons allow you to save information according to the profiles, you have two
 ```java
 public class PlayerStats extends AddonData {
 
-    // Attribute you want to seperate by Profiles
-    private int level;
-    private int life;
-    private Gamemode gamemode;
+  // Attribute you want to seperate by Profiles
+  private int level;
+  private int life;
+  private Gamemode gamemode;
     
   // Constructor of the Class
   public PlayerStats(Player player) {
