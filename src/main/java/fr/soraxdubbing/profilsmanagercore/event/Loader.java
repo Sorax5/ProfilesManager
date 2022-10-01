@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
-import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import java.util.List;
 
@@ -19,10 +18,10 @@ public class Loader implements Listener {
     private ProfilsManagerCore plugin;
     private List<CraftUser> users;
 
-    public Loader(ProfilsManagerCore plugin){
+    public Loader(ProfilsManagerCore plugin,CraftUserManager manager, List<CraftUser> users){
         this.plugin = plugin;
-        this.manager = plugin.getManager();
-        this.users = plugin.getUsers();
+        this.manager = manager;
+        this.users = users;
     }
 
     @EventHandler
@@ -43,27 +42,32 @@ public class Loader implements Listener {
     }
 
     @EventHandler
-    public void onRespawn(PlayerRespawnEvent e){
+    public void onPlayerRespawn(PlayerRespawnEvent e){
         CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
-        if(user != null){
-            user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
-            manager.saveCraftUser(user);
-            user.getActualProfil().LoadingProfil(e.getPlayer(),plugin);
+        if(user == null){
+            user = manager.loadCraftUser(e.getPlayer());
+            users.add(user);
         }
+        user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
+        manager.saveCraftUser(user);
+        user.getActualProfil().LoadingProfil(e.getPlayer(),plugin);
+
     }
 
     @EventHandler
-    public void onChangeWorld(PlayerChangedWorldEvent e){
+    public void onChangePlayerWorld(PlayerChangedWorldEvent e){
         CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
-        if(user != null){
-            user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
-            manager.saveCraftUser(user);
-            user.getActualProfil().LoadingProfil(e.getPlayer(),plugin);
+        if(user == null){
+            user = manager.loadCraftUser(e.getPlayer());
+            users.add(user);
         }
+        user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
+        manager.saveCraftUser(user);
+        user.getActualProfil().LoadingProfil(e.getPlayer(),plugin);
     }
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent e){
+    public void onPlayerQuit(PlayerQuitEvent e){
         CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
         if(user != null){
             user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
@@ -73,7 +77,7 @@ public class Loader implements Listener {
     }
 
     @EventHandler
-    public void onKick(PlayerKickEvent e){
+    public void onPlayerKick(PlayerKickEvent e){
         CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
         if(user != null){
             user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
@@ -81,8 +85,6 @@ public class Loader implements Listener {
             users.remove(user);
         }
     }
-
-
 
     public void save() {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {

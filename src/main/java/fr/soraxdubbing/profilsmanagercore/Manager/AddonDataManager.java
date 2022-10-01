@@ -25,7 +25,7 @@ public class AddonDataManager {
         AddonRegisterEvent event = new AddonRegisterEvent(serialize);
         Bukkit.getPluginManager().callEvent(event);
         List<AddonData> allData = new ArrayList<>();
-        Path path = Paths.get(directory );
+        Path path = Paths.get(directory.replace("//","/"));
         if(path.toFile().exists()) {
             File[] files = path.toFile().listFiles();
             assert files != null;
@@ -46,7 +46,7 @@ public class AddonDataManager {
     public void saveAddonDatas(List<AddonData> allData, String directory) {
         AddonRegisterEvent event = new AddonRegisterEvent(serialize);
         Bukkit.getPluginManager().callEvent(event);
-        Path path = Paths.get(directory + "\\" + "data");
+        Path path = Paths.get(directory.replace("//","/") + "/" + "data");
         if(!path.toFile().exists()){
             try{
                 Files.createDirectory(path);

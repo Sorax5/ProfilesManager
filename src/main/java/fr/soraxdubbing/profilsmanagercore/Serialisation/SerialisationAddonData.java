@@ -21,6 +21,7 @@ public class SerialisationAddonData {
         RuntimeTypeAdapterFactory<AddonData> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
                 .of(AddonData.class, "type");
         for (Class aClass : this.list) {
+            System.out.println("----------------------");
             System.out.println(aClass.getName());
             runtimeTypeAdapterFactory.registerSubtype(aClass);
         }

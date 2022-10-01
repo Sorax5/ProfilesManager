@@ -26,7 +26,7 @@ public final class ProfilsManagerCore extends JavaPlugin {
         Metrics metrics = new Metrics(this, pluginId);
 
         // Plugin startup logic
-        File userFile = new File(getDataFolder()+"/user/");
+        File userFile = new File(getDataFolder().getAbsolutePath() + "/" +"user");
         this.getDataFolder().mkdir();
         userFile.mkdir();
         this.saveDefaultConfig();
@@ -34,7 +34,7 @@ public final class ProfilsManagerCore extends JavaPlugin {
         this.manager = new CraftUserManager(userFile.getAbsolutePath(),this);
         this.users = new ArrayList<>();
 
-        this.getServer().getPluginManager().registerEvents(new Loader(this), this);
+        this.getServer().getPluginManager().registerEvents(new Loader(this,this.getManager(),this.getUsers()), this);
 
         profilsRegister();
 
@@ -44,7 +44,6 @@ public final class ProfilsManagerCore extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        getLogger().info("Sauvegarde des Users");
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             CraftUser user = getUser(onlinePlayer.getUniqueId());
             if (user != null) {
@@ -69,10 +68,18 @@ public final class ProfilsManagerCore extends JavaPlugin {
         admin.setTabCompleter(new AdminCompletion());
     }
 
+    /**
+     * Get list of loaded users
+     * @return List of loaded users
+     */
     public List<CraftUser> getUsers(){
         return this.users;
     }
 
+    /**
+     * Get user by player id
+     * @return CraftUser
+     */
     public CraftUser getUser(UUID identifier){
         for(CraftUser user : this.users){
             if(user.getPlayerUuid().equals(identifier)){
@@ -82,14 +89,18 @@ public final class ProfilsManagerCore extends JavaPlugin {
         return null;
     }
 
-
-
-
-
+    /**
+     * get CraftUserManager who manage all users
+     * @return CraftUserManager
+     */
     public CraftUserManager getManager() {
         return manager;
     }
 
+    /**
+     * Get instance of ProfilsManagerCore
+     * @return ProfilsManagerCore
+     */
     public static ProfilsManagerCore getInstance() {
         return ProfilsManagerCore.INSTANCE;
     }

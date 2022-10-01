@@ -4,6 +4,8 @@ main: fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore
 authors: [ SoraxDubbing ]
 softdepend:
   - Essentials
+  - Vault
+  - LuckPerms
 description: Plugin permettant de gerer des profils par Joueurs
 commands:
   profils:

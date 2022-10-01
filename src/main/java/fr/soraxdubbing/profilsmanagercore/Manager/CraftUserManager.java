@@ -29,7 +29,7 @@ public class CraftUserManager {
 
     public CraftUser loadCraftUser(Player player){
 
-        Path path = Paths.get(this.saveDirectory + "\\" + player.getUniqueId());
+        Path path = Paths.get(this.saveDirectory + "/" + player.getUniqueId());
         if(!path.toFile().exists()){
             try{
                 Files.createDirectory(path);
@@ -62,7 +62,7 @@ public class CraftUserManager {
     }
 
     public void saveCraftUser(CraftUser craftUser){
-        Path path = Paths.get(this.saveDirectory + "\\" + craftUser.getPlayerUuid());
+        Path path = Paths.get(this.saveDirectory + "/" + craftUser.getPlayerUuid());
         if(!path.toFile().exists()){
             try{
                 Files.createDirectory(path);
