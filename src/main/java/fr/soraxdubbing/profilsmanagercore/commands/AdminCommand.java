@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class AdminCommand {
     @Command(
-            aliases = "s",
+            aliases = "save",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.save",
             usage = "[player] [name]"
@@ -23,29 +23,30 @@ public class AdminCommand {
         }
 
         player.sendMessage("§aLe profil " + name + " a été sauvegardé");
-        // faire le serialize de l'objet profil
+
+        ProfilsManagerCore.getInstance().getSaver().save(user);
     }
 
-    @Command(
-            aliases = "l",
+    /*@Command(
+            aliases = "load",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.load",
             usage = "[player] [name]"
     )
     public void load(@Sender Player player, Player target, String name) {
-        CraftUser user = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
+        try{
+            CraftUser user = ProfilsManagerCore.getInstance().getLoader().load(target.getUniqueId());
 
-        if(user == null){
-            player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
+        } catch (Exception e) {
+            player.sendMessage("§cErreur : §fLe profil n'existe pas !");
             return;
         }
 
-        player.sendMessage("§aProfil " + name + " chargé");
-        // faire le deserialize de l'objet profil
-    }
+
+    }*/
 
     @Command(
-            aliases = "a",
+            aliases = "add",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.add",
             usage = "[player] [name]"
@@ -64,7 +65,7 @@ public class AdminCommand {
     }
 
     @Command(
-            aliases = "r",
+            aliases = "remove",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.remove",
             usage = "[player] [name]"
@@ -88,7 +89,7 @@ public class AdminCommand {
     }
 
     @Command(
-            aliases = "c",
+            aliases = "copy",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.copy",
             usage = "[player origin] [player target] [name]"
@@ -113,7 +114,7 @@ public class AdminCommand {
     }
 
     @Command(
-            aliases = "t",
+            aliases = "transfer",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.transfer",
             usage = "[player origin] [player target] [name]"

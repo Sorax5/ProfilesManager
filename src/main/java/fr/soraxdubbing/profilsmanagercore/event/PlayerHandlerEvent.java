@@ -12,21 +12,29 @@ import org.bukkit.event.player.*;
 
 import java.util.List;
 
-public class Loader implements Listener {
+public class PlayerHandlerEvent implements Listener {
 
     private CraftUserManager manager;
     private ProfilsManagerCore plugin;
     private List<CraftUser> users;
 
-    public Loader(ProfilsManagerCore plugin,CraftUserManager manager, List<CraftUser> users){
+    public PlayerHandlerEvent(ProfilsManagerCore plugin, CraftUserManager manager, List<CraftUser> users){
         this.plugin = plugin;
         this.manager = manager;
         this.users = users;
     }
 
     @EventHandler
-    public void onJoin(PlayerLoginEvent e){
-        CraftUser user = manager.loadCraftUser(e.getPlayer());
+    public void onPlayerJoin(PlayerLoginEvent e){
+        CraftUser user = ProfilsManagerCore.getInstance().getLoader().load(e.getPlayer().getUniqueId());
+
+        if(user == null){
+            user = new CraftUser(e.getPlayer().getUniqueId());
+            CraftProfil profil = new CraftProfil("default");
+            user.setActualProfil(profil);
+            ProfilsManagerCore.getInstance().getSaver().save(user);
+        }
+
         users.add(user);
 
         if (!user.HasActualProfil() && user.getProfils().size() == 0){
@@ -49,20 +57,20 @@ public class Loader implements Listener {
             users.add(user);
         }
         user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
-        manager.saveCraftUser(user);
+        ProfilsManagerCore.getInstance().getSaver().save(user);
         user.getActualProfil().LoadingProfil(e.getPlayer(),plugin);
 
     }
 
     @EventHandler
-    public void onChangePlayerWorld(PlayerChangedWorldEvent e){
+    public void onPlayerChangeWorld(PlayerChangedWorldEvent e){
         CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
         if(user == null){
             user = manager.loadCraftUser(e.getPlayer());
             users.add(user);
         }
         user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
-        manager.saveCraftUser(user);
+        ProfilsManagerCore.getInstance().getSaver().save(user);
         user.getActualProfil().LoadingProfil(e.getPlayer(),plugin);
     }
 
@@ -71,7 +79,7 @@ public class Loader implements Listener {
         CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
         if(user != null){
             user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
-            manager.saveCraftUser(user);
+            ProfilsManagerCore.getInstance().getSaver().save(user);
             users.remove(user);
         }
     }
@@ -81,7 +89,7 @@ public class Loader implements Listener {
         CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
         if(user != null){
             user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
-            manager.saveCraftUser(user);
+            ProfilsManagerCore.getInstance().getSaver().save(user);
             users.remove(user);
         }
     }
@@ -91,7 +99,7 @@ public class Loader implements Listener {
             CraftUser user = plugin.getUser(onlinePlayer.getUniqueId());
             if (user != null) {
                 user.getActualProfil().UpdateProfil(onlinePlayer, plugin);
-                manager.saveCraftUser(user);
+                ProfilsManagerCore.getInstance().getSaver().save(user);
                 plugin.getUsers().remove(user);
             }
         }

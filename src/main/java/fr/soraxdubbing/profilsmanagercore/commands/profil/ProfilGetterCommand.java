@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 public class ProfilGetterCommand {
     @Command(
-            aliases = "d",
+            aliases = "date",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.profil.get.date",
             usage = ""
@@ -25,7 +25,7 @@ public class ProfilGetterCommand {
     }
 
     @Command(
-            aliases = "n",
+            aliases = "name",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.profil.get.name",
             usage = ""

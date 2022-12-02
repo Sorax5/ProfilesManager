@@ -2,7 +2,7 @@ package fr.soraxdubbing.profilsmanagercore.Manager;
 
 import fr.soraxdubbing.profilsmanagercore.Addon.AddonData;
 import fr.soraxdubbing.profilsmanagercore.Serialisation.SerialisationAddonData;
-import fr.soraxdubbing.profilsmanagercore.event.AddonRegisterEvent;
+import fr.soraxdubbing.profilsmanagercore.API.AddonRegisterEvent;
 import org.bukkit.Bukkit;
 
 import java.io.File;

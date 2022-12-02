@@ -9,7 +9,7 @@ import java.util.UUID;
 public class CraftUser {
 
     private UUID identifier;
-    private transient List<CraftProfil> profils;
+    private List<CraftProfil> profils;
     private transient CraftProfil loadedProfil;
 
     /**
@@ -41,7 +41,7 @@ public class CraftUser {
 
     /**
      * add a profil to the user
-     * @param CraftProfil
+     * @param CraftProfil _profil
      */
     public void addProfils(CraftProfil _profils){
         this.profils.add(_profils);

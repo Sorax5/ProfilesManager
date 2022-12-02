@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 public class ProfilSetterCommand {
     @Command(
-            aliases = "s",
+            aliases = "set",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.profil.set",
             usage = "[name]"

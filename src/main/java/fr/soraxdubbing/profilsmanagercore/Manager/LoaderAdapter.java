@@ -13,4 +13,8 @@ public abstract class LoaderAdapter {
     }
 
     public abstract CraftUser load(UUID uuid);
+
+    protected String getFolderPath() {
+        return folderPath;
+    }
 }

@@ -6,27 +6,5 @@ softdepend:
   - Essentials
   - Vault
   - LuckPerms
-description: Plugin permettant de gerer des profils par Joueurs
-commands:
-  profils:
-    description: permet de voir les profils
-    default: op
-    permission: pmc.profils
-    usage: /profils
-    aliases:
-      - Profils
-      - profils
-  profil:
-    description: permet de manager son profil actuel
-    default: op
-    permission: pmc.profil
-    usage: /profil
-    aliases:
-      - profil
-  admin:
-    description: permet de manager les profils
-    default: op
-    permission: pmc.admin
-    usage: /admin
-    aliases:
-      - admin
+description: Plugin permettant le multi-compte sur un serveur.
+

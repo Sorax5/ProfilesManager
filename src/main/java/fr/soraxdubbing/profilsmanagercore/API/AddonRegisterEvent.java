@@ -1,4 +1,4 @@
-package fr.soraxdubbing.profilsmanagercore.event;
+package fr.soraxdubbing.profilsmanagercore.API;
 
 import fr.soraxdubbing.profilsmanagercore.Serialisation.SerialisationAddonData;
 import org.bukkit.event.Event;

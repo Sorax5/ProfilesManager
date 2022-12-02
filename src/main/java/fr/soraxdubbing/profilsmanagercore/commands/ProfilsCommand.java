@@ -21,7 +21,7 @@ import java.util.Collections;
 public class ProfilsCommand {
 
     @Command(
-            aliases = "ps",
+            aliases = "profils",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.profils",
             usage = ""
@@ -75,6 +75,7 @@ public class ProfilsCommand {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        player.sendMessage("§a[ProfilsManagerCore] Profils chargé.");
 
     }
 
