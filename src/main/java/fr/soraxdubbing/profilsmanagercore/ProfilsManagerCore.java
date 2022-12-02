@@ -1,12 +1,17 @@
 package fr.soraxdubbing.profilsmanagercore;
 
+import app.ashcon.intake.bukkit.BukkitIntake;
+import app.ashcon.intake.bukkit.graph.BasicBukkitCommandGraph;
+import app.ashcon.intake.fluent.DispatcherNode;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
 import fr.soraxdubbing.profilsmanagercore.Manager.CraftUserManager;
+import fr.soraxdubbing.profilsmanagercore.commands.AdminCommand;
+import fr.soraxdubbing.profilsmanagercore.commands.ProfilsCommand;
+import fr.soraxdubbing.profilsmanagercore.commands.profil.ProfilGetterCommand;
+import fr.soraxdubbing.profilsmanagercore.commands.profil.ProfilSetterCommand;
 import fr.soraxdubbing.profilsmanagercore.event.Loader;
-import fr.soraxdubbing.profilsmanagercore.profil.*;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -43,7 +48,6 @@ public final class ProfilsManagerCore extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             CraftUser user = getUser(onlinePlayer.getUniqueId());
             if (user != null) {
@@ -55,17 +59,40 @@ public final class ProfilsManagerCore extends JavaPlugin {
     }
 
     private void profilsRegister(){
-        PluginCommand profilsCommand = getCommand("profils");
+        /*PluginCommand profilsCommand = getCommand("profils");
         profilsCommand.setExecutor(new ProfilsCommand(this));
-        profilsCommand.setTabCompleter(new ProfilCompletion());
+        profilsCommand.setTabCompleter(new ProfilCompletion());*/
 
-        PluginCommand profilCommand = getCommand("profil");
+        /*PluginCommand profilCommand = getCommand("profil");
         profilCommand.setExecutor(new ProfilCommand(this));
-        profilCommand.setTabCompleter(new ProfilCompletion());
+        profilCommand.setTabCompleter(new ProfilCompletion());*/
 
-        PluginCommand admin = getCommand("admin");
+        /*PluginCommand admin = getCommand("admin");
         admin.setExecutor(new AdminCommand(this));
-        admin.setTabCompleter(new AdminCompletion());
+        admin.setTabCompleter(new AdminCompletion());*/
+    }
+
+    @Override
+    public void onLoad() {
+        BasicBukkitCommandGraph cmdGraph = new BasicBukkitCommandGraph();
+
+        // ADMIN COMMANDS
+        DispatcherNode admin = cmdGraph.getRootDispatcherNode().registerNode("admin");
+        admin.registerCommands(new AdminCommand());
+
+        // PROFIL COMMANDS
+        DispatcherNode profil = cmdGraph.getRootDispatcherNode().registerNode("profil");
+        DispatcherNode get = profil.registerNode("get");
+        get.registerCommands(new ProfilGetterCommand());
+
+        DispatcherNode set = profil.registerNode("set");
+        set.registerCommands(new ProfilSetterCommand());
+
+        // PROFILS COMMANDS
+        cmdGraph.getRootDispatcherNode().registerCommands(new ProfilsCommand());
+
+        BukkitIntake bukkitIntake = new BukkitIntake(this, cmdGraph);
+        bukkitIntake.register();
     }
 
     /**
