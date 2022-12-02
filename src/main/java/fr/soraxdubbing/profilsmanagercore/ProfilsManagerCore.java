@@ -40,9 +40,6 @@ public final class ProfilsManagerCore extends JavaPlugin {
         this.users = new ArrayList<>();
 
         this.getServer().getPluginManager().registerEvents(new Loader(this,this.getManager(),this.getUsers()), this);
-
-        profilsRegister();
-
         INSTANCE = this;
     }
 
@@ -58,20 +55,9 @@ public final class ProfilsManagerCore extends JavaPlugin {
         }
     }
 
-    private void profilsRegister(){
-        /*PluginCommand profilsCommand = getCommand("profils");
-        profilsCommand.setExecutor(new ProfilsCommand(this));
-        profilsCommand.setTabCompleter(new ProfilCompletion());*/
-
-        /*PluginCommand profilCommand = getCommand("profil");
-        profilCommand.setExecutor(new ProfilCommand(this));
-        profilCommand.setTabCompleter(new ProfilCompletion());*/
-
-        /*PluginCommand admin = getCommand("admin");
-        admin.setExecutor(new AdminCommand(this));
-        admin.setTabCompleter(new AdminCompletion());*/
-    }
-
+    /**
+     * Enregistre les commandes du plugin (Intake)
+     */
     @Override
     public void onLoad() {
         BasicBukkitCommandGraph cmdGraph = new BasicBukkitCommandGraph();
