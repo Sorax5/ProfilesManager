@@ -3,7 +3,7 @@ package fr.soraxdubbing.profilsmanagercore;
 import app.ashcon.intake.bukkit.BukkitIntake;
 import app.ashcon.intake.bukkit.graph.BasicBukkitCommandGraph;
 import app.ashcon.intake.fluent.DispatcherNode;
-import fr.soraxdubbing.profilsmanagercore.Manager.UsersManager;
+import fr.soraxdubbing.profilsmanagercore.manager.UsersManager;
 import fr.soraxdubbing.profilsmanagercore.commands.AdminCommand;
 import fr.soraxdubbing.profilsmanagercore.commands.ProfilsCommand;
 import fr.soraxdubbing.profilsmanagercore.commands.profil.ProfilGetterCommand;
@@ -19,16 +19,8 @@ public final class ProfilsManagerCore extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        INSTANCE = this;
-
         int pluginId = 15930;
         Metrics metrics = new Metrics(this, pluginId);
-
-        // Plugin startup logic
-        File userFile = new File(getDataFolder().getAbsolutePath() + "/users");
-        this.getDataFolder().mkdir();
-        userFile.mkdir();
-        this.saveDefaultConfig();
 
         this.getServer().getPluginManager().registerEvents(new PlayerHandlerEvent(), this);
     }
@@ -43,6 +35,16 @@ public final class ProfilsManagerCore extends JavaPlugin {
      */
     @Override
     public void onLoad() {
+        INSTANCE = this;
+
+        // FILE
+        File userFile = new File(getDataFolder().getAbsolutePath() + "/users");
+        this.getDataFolder().mkdir();
+        userFile.mkdir();
+        this.saveDefaultConfig();
+
+        // INTAKE FRAMEWORK
+
         BasicBukkitCommandGraph cmdGraph = new BasicBukkitCommandGraph();
 
         // ADMIN COMMANDS

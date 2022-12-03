@@ -1,19 +1,20 @@
-package fr.soraxdubbing.profilsmanagercore.Manager;
+package fr.soraxdubbing.profilsmanagercore.manager;
 
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
 
-public abstract class SaverAdapter {
+import java.util.UUID;
+
+public abstract class LoaderAdapter {
 
     private String folderPath;
 
-    public SaverAdapter(String folderPath) {
+    public LoaderAdapter(String folderPath) {
         this.folderPath = folderPath;
     }
 
-    public abstract void save(CraftUser user);
+    public abstract CraftUser load(UUID uuid);
 
     protected String getFolderPath() {
         return folderPath;
     }
-
 }

@@ -1,8 +1,8 @@
-package fr.soraxdubbing.profilsmanagercore.Manager.Loader;
+package fr.soraxdubbing.profilsmanagercore.manager.Loader;
 
 import com.google.gson.Gson;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.Manager.LoaderAdapter;
+import fr.soraxdubbing.profilsmanagercore.manager.LoaderAdapter;
 
 import java.io.File;
 import java.util.UUID;

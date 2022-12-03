@@ -3,7 +3,7 @@ package fr.soraxdubbing.profilsmanagercore.commands;
 import app.ashcon.intake.Command;
 import app.ashcon.intake.bukkit.parametric.annotation.Sender;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
+import fr.soraxdubbing.profilsmanagercore.manager.UsersManager;
 import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
 import org.bukkit.entity.Player;
 
@@ -15,7 +15,7 @@ public class AdminCommand {
             usage = "[player] [name]"
     )
     public void save(@Sender Player player, Player target, String name) {
-        CraftUser user = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
+        CraftUser user = UsersManager.getInstance().getUser(target);
 
         if(user == null){
             player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
@@ -24,7 +24,7 @@ public class AdminCommand {
 
         player.sendMessage("§aLe profil " + name + " a été sauvegardé");
 
-        ProfilsManagerCore.getInstance().getSaver().save(user);
+        UsersManager.getInstance().saveFileUsers();
     }
 
     /*@Command(
@@ -53,12 +53,7 @@ public class AdminCommand {
     )
     public void add(@Sender Player player, Player target, String name) {
         CraftProfil profil = new CraftProfil(name);
-        CraftUser user = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
-
-        if(user == null){
-            player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
-            return;
-        }
+        CraftUser user = UsersManager.getInstance().getUser(target);
 
         user.addProfils(profil);
         player.sendMessage("§aProfil " + name + " ajouté");
@@ -71,14 +66,9 @@ public class AdminCommand {
             usage = "[player] [name]"
     )
     public void remove(@Sender Player player, Player target, String name) {
-        CraftUser user = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
+        CraftUser user = UsersManager.getInstance().getUser(target);
 
-        if(user == null){
-            player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
-            return;
-        }
-
-        CraftProfil profil = user.getProfilByName(name);
+        CraftProfil profil = user.getProfil(name);
         if(profil == null){
             player.sendMessage("§cErreur : §fLe profil n'existe pas !");
             return;
@@ -95,15 +85,10 @@ public class AdminCommand {
             usage = "[player origin] [player target] [name]"
     )
     public void copy(@Sender Player player, Player origin, Player target , String name) {
-        CraftUser userOrigin = ProfilsManagerCore.getInstance().getUser(origin.getUniqueId());
-        CraftUser userTarget = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
+        CraftUser userOrigin = UsersManager.getInstance().getUser(origin);
+        CraftUser userTarget = UsersManager.getInstance().getUser(target);
 
-        if(userOrigin == null || userTarget == null){
-            player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
-            return;
-        }
-
-        CraftProfil profil = userOrigin.getProfilByName(name);
+        CraftProfil profil = userOrigin.getProfil(name);
         if(profil == null){
             player.sendMessage("§cErreur : §fLe profil n'existe pas !");
             return;
@@ -120,15 +105,10 @@ public class AdminCommand {
             usage = "[player origin] [player target] [name]"
     )
     public void transfer(@Sender Player player, Player origin, Player target , String name) {
-        CraftUser userOrigin = ProfilsManagerCore.getInstance().getUser(origin.getUniqueId());
-        CraftUser userTarget = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
+        CraftUser userOrigin = UsersManager.getInstance().getUser(origin);
+        CraftUser userTarget = UsersManager.getInstance().getUser(target);
 
-        if(userOrigin == null || userTarget == null){
-            player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
-            return;
-        }
-
-        CraftProfil profil = userOrigin.getProfilByName(name);
+        CraftProfil profil = userOrigin.getProfil(name);
         if(profil == null){
             player.sendMessage("§cErreur : §fLe profil n'existe pas !");
             return;

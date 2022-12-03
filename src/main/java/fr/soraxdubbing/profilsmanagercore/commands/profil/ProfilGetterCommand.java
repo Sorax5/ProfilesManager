@@ -3,7 +3,7 @@ package fr.soraxdubbing.profilsmanagercore.commands.profil;
 import app.ashcon.intake.Command;
 import app.ashcon.intake.bukkit.parametric.annotation.Sender;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
+import fr.soraxdubbing.profilsmanagercore.manager.UsersManager;
 import org.bukkit.entity.Player;
 
 public class ProfilGetterCommand {
@@ -15,8 +15,8 @@ public class ProfilGetterCommand {
     )
     public void date(@Sender Player player) {
         try{
-            CraftUser user = ProfilsManagerCore.getInstance().getUser(player.getUniqueId());
-            player.sendMessage("§aDate de création du profil : " + user.getActualProfil().getDateString());
+            CraftUser user = UsersManager.getInstance().getUser(player);
+            player.sendMessage("§aDate de création du profil : " + user.getLoadedProfil().getDateString());
         }
         catch (Exception e){
             player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
@@ -32,8 +32,8 @@ public class ProfilGetterCommand {
     )
     public void name(@Sender Player player) {
         try{
-            CraftUser user = ProfilsManagerCore.getInstance().getUser(player.getUniqueId());
-            player.sendMessage("§aNom du profil : " + user.getActualProfil().getName());
+            CraftUser user = UsersManager.getInstance().getUser(player);
+            player.sendMessage("§aNom du profil : " + user.getLoadedProfil().getName());
         }
         catch (Exception e){
             player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");

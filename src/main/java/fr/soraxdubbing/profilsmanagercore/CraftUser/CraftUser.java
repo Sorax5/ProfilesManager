@@ -41,7 +41,7 @@ public class CraftUser {
 
     /**
      * add a profil to the user
-     * @param CraftProfil _profil
+     * @param _profils CraftProfil
      */
     public void addProfils(CraftProfil _profils){
         this.profils.add(_profils);
@@ -52,7 +52,7 @@ public class CraftUser {
      * @param _profils
      */
     public void removeProfils(CraftProfil _profils){ this.profils.remove(_profils);}
-    public CraftProfil getActualProfil(){
+    public CraftProfil getLoadedProfil(){
         return this.loadedProfil;
     }
 
@@ -60,7 +60,7 @@ public class CraftUser {
      * see if the user have a profil
      * @return boolean
      */
-    public Boolean HasActualProfil(){
+    public Boolean hasLoadedProfil(){
         return this.loadedProfil != null;
     }
 
@@ -68,12 +68,12 @@ public class CraftUser {
      * set a profil to the user
      * @param _actualProfil
      */
-    public void setActualProfil(CraftProfil _actualProfil){
-        if(!this.HasActualProfil()){
+    public void setLoadedProfil(CraftProfil _actualProfil){
+        if(!this.hasLoadedProfil()){
             this.loadedProfil = _actualProfil;
             this.profils.remove(this.loadedProfil);
         }
-        else if(this.getActualProfil().getName().equals(_actualProfil.getName())){
+        else if(this.getLoadedProfil().getName().equals(_actualProfil.getName())){
             return;
         }
         else{
@@ -87,9 +87,9 @@ public class CraftUser {
      * set a profil to the user
      * @param _name
      */
-    public void setActualProfil(String _name){
+    public void setLoadedProfil(String _name){
         if(this.loadedProfil == null){
-            CraftProfil profil = getProfilByName(_name);
+            CraftProfil profil = getProfil(_name);
             if(profil == null){
                 return;
             }
@@ -101,7 +101,7 @@ public class CraftUser {
         }
         else{
             this.getProfils().add(this.loadedProfil);
-            CraftProfil profil = getProfilByName(_name);
+            CraftProfil profil = getProfil(_name);
             if(profil == null){
                 return;
             }
@@ -115,7 +115,7 @@ public class CraftUser {
      * @param _name
      * @return CraftProfil
      */
-    public CraftProfil getProfilByName(String _name){
+    public CraftProfil getProfil(String _name){
         for(CraftProfil profil : this.getProfils()){
             if(profil.getName().equals(_name)){
                 return profil;
@@ -127,25 +127,17 @@ public class CraftUser {
     /**
      * remove actual profil
      */
-    public void removeActualProfil(){
-        if(this.getActualProfil() != null){
-            this.getProfils().add(this.getActualProfil());
+    public void removeLoadedProfil(){
+        if(this.getLoadedProfil() != null){
+            this.getProfils().add(this.getLoadedProfil());
             this.loadedProfil = null;
         }
     }
 
     /**
-     * set whole list of profils
-     * @param _profils
-     */
-    public void setProfils(List<CraftProfil> _profils){
-        this.profils = _profils;
-    }
-
-    /**
      * clear the list of profils
      */
-    public void clearProfils(){
+    public void clear(){
         this.profils.clear();
     }
 

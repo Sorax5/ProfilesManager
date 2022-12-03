@@ -3,7 +3,7 @@ package fr.soraxdubbing.profilsmanagercore.commands.profil;
 import app.ashcon.intake.Command;
 import app.ashcon.intake.bukkit.parametric.annotation.Sender;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
+import fr.soraxdubbing.profilsmanagercore.manager.UsersManager;
 import org.bukkit.entity.Player;
 
 public class ProfilSetterCommand {
@@ -15,8 +15,8 @@ public class ProfilSetterCommand {
     )
     public void set(@Sender Player player , String name) {
         try{
-            CraftUser user = ProfilsManagerCore.getInstance().getUser(player.getUniqueId());
-            user.getActualProfil().setName(name);
+            CraftUser user = UsersManager.getInstance().getUser(player);
+            user.getLoadedProfil().setName(name);
             player.sendMessage("§aLe nom du profil a été changé en " + name);
         }
         catch (Exception e){

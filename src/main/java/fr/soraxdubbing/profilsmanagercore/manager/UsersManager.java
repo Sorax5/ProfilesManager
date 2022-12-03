@@ -1,10 +1,11 @@
-package fr.soraxdubbing.profilsmanagercore.Manager;
+package fr.soraxdubbing.profilsmanagercore.manager;
 
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.Manager.Loader.JsonLoader;
-import fr.soraxdubbing.profilsmanagercore.Manager.Saver.JsonSaver;
+import fr.soraxdubbing.profilsmanagercore.manager.Loader.JsonLoader;
+import fr.soraxdubbing.profilsmanagercore.manager.Saver.JsonSaver;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,20 +41,19 @@ public class UsersManager {
 
     /**
      * Get the user by his id
-     * @param uudi the id of the user
+     * @param player the player
      * @return the user
      */
-    public CraftUser getUser(UUID uudi) {
+    public CraftUser getUser(Player player) {
+        if(!hasUser(player.getUniqueId())) {
+            this.registerUser(player);
+        }
         for (CraftUser user : users) {
-            if (user.getPlayerUuid().equals(uudi)) {
+            if (user.getPlayerUuid().equals(player.getUniqueId())) {
                 return user;
             }
         }
-        CraftUser user = new CraftUser(uudi);
-        CraftProfil profile = new CraftProfil("default");
-        user.setActualProfil(profile);
-        this.registerUser(user);
-        return user;
+        return null;
     }
 
     /**
@@ -62,26 +62,38 @@ public class UsersManager {
      * @return true if the user is loaded
      */
     public boolean hasUser(UUID uuid) {
-        return getUser(uuid) != null;
+        boolean has = false;
+        for (CraftUser user : users) {
+            if (user.getPlayerUuid().equals(uuid)) {
+                has = true;
+            }
+        }
+        return has;
     }
 
     /**
      * register a user
-     * @param user the user to register
+     * @param player the player to register
      */
-    public void registerUser(CraftUser user) {
-        if (!hasUser(user.getPlayerUuid())) {
-            users.add(user);
+    public void registerUser(Player player) {
+        if(!hasUser(player.getUniqueId())) {
+            CraftUser user = new CraftUser(player.getUniqueId());
+            CraftProfil profile = new CraftProfil("default");
+            profile.UpdateProfil(player, ProfilsManagerCore.getInstance());
+            user.setLoadedProfil(profile);
+            this.users.add(user);
         }
     }
 
     /**
      * unregister a user
-     * @param user the user to unregister
+     * @param player the user to unregister
      */
-    public void unregisterUser(CraftUser user) {
-        if (hasUser(user.getPlayerUuid())) {
-            users.remove(user);
+    public void unregisterUser(Player player) {
+        if(hasUser(player.getUniqueId())) {
+            CraftUser user = getUser(player);
+            this.users.remove(user);
+            player.kickPlayer("§cVotre profil a été supprimé");
         }
     }
 

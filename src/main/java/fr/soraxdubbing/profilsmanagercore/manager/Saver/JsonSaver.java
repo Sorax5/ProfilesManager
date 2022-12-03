@@ -1,12 +1,11 @@
-package fr.soraxdubbing.profilsmanagercore.Manager.Saver;
+package fr.soraxdubbing.profilsmanagercore.manager.Saver;
 
 import com.google.gson.Gson;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.Manager.SaverAdapter;
+import fr.soraxdubbing.profilsmanagercore.manager.SaverAdapter;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 
 public class JsonSaver extends SaverAdapter {
 
@@ -19,7 +18,7 @@ public class JsonSaver extends SaverAdapter {
 
     @Override
     public void save(CraftUser user) {
-        user.removeActualProfil();
+        user.removeLoadedProfil();
         File file = new File(super.getFolderPath() + "/" + user.getPlayerUuid() + ".json");
         try(PrintWriter writer = new PrintWriter(file)) {
             String json = gson.toJson(user);

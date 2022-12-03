@@ -7,6 +7,7 @@ import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.PaginatedGui;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
+import fr.soraxdubbing.profilsmanagercore.manager.UsersManager;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
 import net.kyori.adventure.text.Component;
@@ -28,8 +29,8 @@ public class ProfilsCommand {
     )
     public void profils(@Sender Player player) {
         try{
-            CraftUser user = ProfilsManagerCore.getInstance().getUser(player.getUniqueId());
-            user.getActualProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
+            CraftUser user = UsersManager.getInstance().getUser(player);
+            user.getLoadedProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
 
             PaginatedGui gui = Gui.paginated()
                     .title(Component.text("§6Profil"))
@@ -45,8 +46,8 @@ public class ProfilsCommand {
             // Next item
             gui.setItem(6, 7, ItemBuilder.from(Material.PAPER).setName("Next").asGuiItem(event -> gui.next()));
 
-            if (user.getActualProfil() != null) {
-                ItemStack item = CreateItemProfils(user.getActualProfil(), gui);
+            if (user.getLoadedProfil() != null) {
+                ItemStack item = CreateItemProfils(user.getLoadedProfil(), gui);
                 GuiItem guiItem = ItemBuilder.from(item).asGuiItem();
                 gui.addItem(guiItem);
             }
@@ -56,10 +57,10 @@ public class ProfilsCommand {
                     ItemStack item = CreateItemProfils(profil, gui);
 
                     GuiItem guiItem = ItemBuilder.from(item).asGuiItem(event -> {
-                        user.getActualProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
-                        user.setActualProfil(profil);
-                        user.getActualProfil().LoadingProfil(player, ProfilsManagerCore.getInstance());
-                        player.sendMessage("[ProfilsManagerCore]§a Profil " + user.getActualProfil().getName() + " chargé.");
+                        user.getLoadedProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
+                        user.setLoadedProfil(profil);
+                        user.getLoadedProfil().LoadingProfil(player, ProfilsManagerCore.getInstance());
+                        player.sendMessage("[ProfilsManagerCore]§a Profil " + user.getLoadedProfil().getName() + " chargé.");
                         gui.open(player);
                     });
 
