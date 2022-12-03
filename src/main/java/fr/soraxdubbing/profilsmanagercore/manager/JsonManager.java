@@ -31,10 +31,13 @@ public class JsonManager extends DataManager {
     private void reload(){
         RuntimeTypeAdapterFactory<AddonData> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
                 .of(AddonData.class, "type");
-        for (Class aClass : this.list) {
+
+        System.out.println("----------------------");
+        for (Class classType : this.list) {
+            System.out.println(classType.getName());
             System.out.println("----------------------");
-            System.out.println(aClass.getName());
-            runtimeTypeAdapterFactory.registerSubtype(aClass);
+
+            runtimeTypeAdapterFactory.registerSubtype(classType);
         }
         this.gson = new GsonBuilder()
                     .setPrettyPrinting()
