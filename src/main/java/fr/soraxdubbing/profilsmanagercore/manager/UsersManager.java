@@ -98,7 +98,8 @@ public class UsersManager {
         File userFile = new File(this.path);
         for (File file : userFile.listFiles()) {
             if (file.getName().endsWith(".json")) {
-                CraftUser user = dataManager.load(UUID.fromString(file.getName().replace(".json", "")));
+                UUID uuid = UUID.fromString(file.getName().replace(".json", ""));
+                CraftUser user = dataManager.load(uuid);
                 if (user != null) {
                     users.add(user);
                 }

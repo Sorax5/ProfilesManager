@@ -2,11 +2,18 @@ package fr.soraxdubbing.profilsmanagercore.manager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import fr.soraxdubbing.profilsmanagercore.Addon.AddonData;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
+import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.nio.file.FileStore;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -41,9 +48,10 @@ public class JsonManager extends DataManager {
 
     @Override
     public CraftUser load(UUID uuid) {
-        File file = new File(getFolderPath() + File.separator + uuid.toString() + ".json");
-        if(file.exists()){
-            return this.gson.fromJson(file.toString(),CraftUser.class);
+        try(Reader reader = Files.newBufferedReader(Paths.get(getFolderPath() + "/" + uuid + ".json"))){
+            return gson.fromJson(reader, CraftUser.class);
+        }catch (IllegalStateException | JsonSyntaxException | IOException exception){
+            exception.printStackTrace();
         }
         return null;
     }

@@ -38,13 +38,16 @@ public final class ProfilsManagerCore extends JavaPlugin {
         INSTANCE = this;
 
         // FILE
+        getLogger().info("Création du fichier de configuration...");
         File userFile = new File(getDataFolder().getAbsolutePath() + "/users");
         this.getDataFolder().mkdir();
         userFile.mkdir();
         this.saveDefaultConfig();
+        getLogger().info("Fichier de configuration créé !");
 
         // INTAKE FRAMEWORK
 
+        getLogger().info("Enregistrement des commandes...");
         BasicBukkitCommandGraph cmdGraph = new BasicBukkitCommandGraph();
 
         // ADMIN COMMANDS
@@ -66,6 +69,7 @@ public final class ProfilsManagerCore extends JavaPlugin {
         bukkitIntake.register();
 
         // LOAD USERS
+        getLogger().info("Chargement des utilisateurs...");
         UsersManager.getInstance().loadFileUsers();
     }
 

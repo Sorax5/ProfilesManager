@@ -22,7 +22,7 @@ public class PlayerHandlerEvent implements Listener {
     public void onPlayerJoin(PlayerLoginEvent e){
         CraftUser user = UsersManager.getInstance().getUser(e.getPlayer());
 
-        if (!user.hasLoadedProfil() && user.getProfils().size() == 0){
+        /*if (!user.hasLoadedProfil() && user.getProfils().size() == 0){
             CraftProfil profil = new CraftProfil("Default");
             user.addProfils(profil);
             user.setLoadedProfil(profil);
@@ -31,7 +31,7 @@ public class PlayerHandlerEvent implements Listener {
         else if (!user.hasLoadedProfil() && user.getProfils().size() > 0){
             user.setLoadedProfil(user.getProfils().get(0));
         }
-        user.getLoadedProfil().LoadingProfil(e.getPlayer(),plugin);
+        user.getLoadedProfil().LoadingProfil(e.getPlayer(),plugin);*/
     }
 
     @EventHandler
