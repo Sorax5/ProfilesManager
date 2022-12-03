@@ -60,7 +60,7 @@ public final class ProfilsManagerCore extends JavaPlugin {
         get.registerCommands(new ProfilGetterCommand());
 
         DispatcherNode set = profil.registerNode("set");
-        profil.registerCommands(new ProfilSetterCommand());
+        set.registerCommands(new ProfilSetterCommand());
 
         // PROFILS COMMANDS
         cmdGraph.getRootDispatcherNode().registerCommands(new ProfilsCommand());
