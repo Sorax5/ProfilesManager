@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package fr.soraxdubbing.profilsmanagercore.Serialisation;
+package fr.soraxdubbing.profilsmanagercore.manager;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;

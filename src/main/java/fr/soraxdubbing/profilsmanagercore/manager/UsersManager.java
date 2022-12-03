@@ -1,8 +1,6 @@
 package fr.soraxdubbing.profilsmanagercore.manager;
 
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.manager.Loader.JsonLoader;
-import fr.soraxdubbing.profilsmanagercore.manager.Saver.JsonSaver;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
 import org.bukkit.entity.Player;
@@ -16,16 +14,14 @@ public class UsersManager {
 
     private static UsersManager instance;
     private List<CraftUser> users;
-    private SaverAdapter saver;
-    private LoaderAdapter loader;
+    private DataManager dataManager;
     private String path;
 
     private UsersManager() {
         instance = this;
         this.path = ProfilsManagerCore.getInstance().getDataFolder().getAbsolutePath() + "/users";
         users = new ArrayList<>();
-        this.loader = new JsonLoader(this.path);
-        this.saver = new JsonSaver(this.path);
+        this.dataManager = new JsonManager(this.path);
     }
 
     /**
@@ -102,7 +98,7 @@ public class UsersManager {
         File userFile = new File(this.path);
         for (File file : userFile.listFiles()) {
             if (file.getName().endsWith(".json")) {
-                CraftUser user = loader.load(UUID.fromString(file.getName().replace(".json", "")));
+                CraftUser user = dataManager.load(UUID.fromString(file.getName().replace(".json", "")));
                 if (user != null) {
                     users.add(user);
                 }
@@ -115,7 +111,7 @@ public class UsersManager {
 
     public void saveFileUsers() {
         for (CraftUser user : users) {
-            saver.save(user);
+            dataManager.save(user);
         }
     }
 

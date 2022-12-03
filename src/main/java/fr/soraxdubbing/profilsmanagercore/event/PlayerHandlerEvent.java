@@ -52,12 +52,14 @@ public class PlayerHandlerEvent implements Listener {
     public void onPlayerQuit(PlayerQuitEvent e){
         CraftUser user = UsersManager.getInstance().getUser(e.getPlayer());
         user.getLoadedProfil().UpdateProfil(e.getPlayer(),plugin);
+        UsersManager.getInstance().saveFileUsers();
     }
 
     @EventHandler
     public void onPlayerKick(PlayerKickEvent e){
         CraftUser user = UsersManager.getInstance().getUser(e.getPlayer());
         user.getLoadedProfil().UpdateProfil(e.getPlayer(),plugin);
+        UsersManager.getInstance().saveFileUsers();
     }
 
     public void save() {
