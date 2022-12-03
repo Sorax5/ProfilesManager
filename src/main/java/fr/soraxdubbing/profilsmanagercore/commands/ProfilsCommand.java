@@ -60,6 +60,7 @@ public class ProfilsCommand {
                         user.setActualProfil(profil);
                         user.getActualProfil().LoadingProfil(player, ProfilsManagerCore.getInstance());
                         player.sendMessage("[ProfilsManagerCore]§a Profil " + user.getActualProfil().getName() + " chargé.");
+                        gui.open(player);
                     });
 
                     gui.addItem(guiItem);
@@ -75,7 +76,7 @@ public class ProfilsCommand {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        player.sendMessage("§a[ProfilsManagerCore] Profils chargé.");
+        player.sendMessage("[ProfilsManagerCore] §aProfils chargé.");
 
     }
 

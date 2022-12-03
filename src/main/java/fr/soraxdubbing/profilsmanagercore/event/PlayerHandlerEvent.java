@@ -1,8 +1,8 @@
 package fr.soraxdubbing.profilsmanagercore.event;
 
+import fr.soraxdubbing.profilsmanagercore.Manager.UsersManager;
 import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.Manager.CraftUserManager;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -10,32 +10,17 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
 
-import java.util.List;
-
 public class PlayerHandlerEvent implements Listener {
 
-    private CraftUserManager manager;
     private ProfilsManagerCore plugin;
-    private List<CraftUser> users;
 
-    public PlayerHandlerEvent(ProfilsManagerCore plugin, CraftUserManager manager, List<CraftUser> users){
-        this.plugin = plugin;
-        this.manager = manager;
-        this.users = users;
+    public PlayerHandlerEvent(){
+        this.plugin = ProfilsManagerCore.getInstance();
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerLoginEvent e){
-        CraftUser user = ProfilsManagerCore.getInstance().getLoader().load(e.getPlayer().getUniqueId());
-
-        if(user == null){
-            user = new CraftUser(e.getPlayer().getUniqueId());
-            CraftProfil profil = new CraftProfil("default");
-            user.setActualProfil(profil);
-            ProfilsManagerCore.getInstance().getSaver().save(user);
-        }
-
-        users.add(user);
+        CraftUser user = UsersManager.getInstance().getUser(e.getPlayer().getUniqueId());
 
         if (!user.HasActualProfil() && user.getProfils().size() == 0){
             CraftProfil profil = new CraftProfil("Default");
@@ -51,57 +36,34 @@ public class PlayerHandlerEvent implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e){
-        CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
-        if(user == null){
-            user = manager.loadCraftUser(e.getPlayer());
-            users.add(user);
-        }
+        CraftUser user = UsersManager.getInstance().getUser(e.getPlayer().getUniqueId());
         user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
-        ProfilsManagerCore.getInstance().getSaver().save(user);
         user.getActualProfil().LoadingProfil(e.getPlayer(),plugin);
-
     }
 
     @EventHandler
     public void onPlayerChangeWorld(PlayerChangedWorldEvent e){
-        CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
-        if(user == null){
-            user = manager.loadCraftUser(e.getPlayer());
-            users.add(user);
-        }
+        CraftUser user = UsersManager.getInstance().getUser(e.getPlayer().getUniqueId());
         user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
-        ProfilsManagerCore.getInstance().getSaver().save(user);
         user.getActualProfil().LoadingProfil(e.getPlayer(),plugin);
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e){
-        CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
-        if(user != null){
-            user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
-            ProfilsManagerCore.getInstance().getSaver().save(user);
-            users.remove(user);
-        }
+        CraftUser user = UsersManager.getInstance().getUser(e.getPlayer().getUniqueId());
+        user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
     }
 
     @EventHandler
     public void onPlayerKick(PlayerKickEvent e){
-        CraftUser user = plugin.getUser(e.getPlayer().getUniqueId());
-        if(user != null){
-            user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
-            ProfilsManagerCore.getInstance().getSaver().save(user);
-            users.remove(user);
-        }
+        CraftUser user = UsersManager.getInstance().getUser(e.getPlayer().getUniqueId());
+        user.getActualProfil().UpdateProfil(e.getPlayer(),plugin);
     }
 
     public void save() {
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            CraftUser user = plugin.getUser(onlinePlayer.getUniqueId());
-            if (user != null) {
-                user.getActualProfil().UpdateProfil(onlinePlayer, plugin);
-                ProfilsManagerCore.getInstance().getSaver().save(user);
-                plugin.getUsers().remove(user);
-            }
+            CraftUser user = UsersManager.getInstance().getUser(onlinePlayer.getUniqueId());
+            user.getActualProfil().UpdateProfil(onlinePlayer, plugin);
         }
     }
 }
