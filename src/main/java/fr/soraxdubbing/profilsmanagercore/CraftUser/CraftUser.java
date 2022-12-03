@@ -10,7 +10,7 @@ public class CraftUser {
 
     private UUID identifier;
     private List<CraftProfil> profils;
-    private transient CraftProfil loadedProfil;
+    private int selectedProfil;
 
     /**
      * Constructor of CraftUser
@@ -20,14 +20,15 @@ public class CraftUser {
         System.out.println("[ProfilsRoadToNincraft] Création de l'utilisateur " + identifier.toString());
         this.identifier = identifier;
         this.profils = new ArrayList<CraftProfil>();
-        this.loadedProfil = null;
+        this.selectedProfil = 0;
+        this.profils.add(new CraftProfil("default"));
     }
 
     /**
      * Get the identifier of the user
      * @return UUID
      */
-    public UUID getPlayerUuid(){
+    public UUID getUniqueId(){
         return this.identifier;
     }
 
@@ -53,15 +54,7 @@ public class CraftUser {
      */
     public void removeProfils(CraftProfil _profils){ this.profils.remove(_profils);}
     public CraftProfil getLoadedProfil(){
-        return this.loadedProfil;
-    }
-
-    /**
-     * see if the user have a profil
-     * @return boolean
-     */
-    public Boolean hasLoadedProfil(){
-        return this.loadedProfil != null;
+        return this.profils.get(this.selectedProfil);
     }
 
     /**
@@ -69,17 +62,18 @@ public class CraftUser {
      * @param _actualProfil
      */
     public void setLoadedProfil(CraftProfil _actualProfil){
-        if(!this.hasLoadedProfil()){
-            this.loadedProfil = _actualProfil;
-            this.profils.remove(this.loadedProfil);
-        }
-        else if(this.getLoadedProfil().getName().equals(_actualProfil.getName())){
-            return;
-        }
-        else{
-            this.profils.remove(_actualProfil);
-            this.profils.add(this.loadedProfil);
-            this.loadedProfil = _actualProfil;
+        this.selectedProfil = this.profils.indexOf(_actualProfil);
+    }
+
+    /**
+     * set a profil to the user
+     * @param index int
+     */
+    public void setLoadedProfil(int index){
+        try{
+            this.selectedProfil = index;
+        } catch (Exception e) {
+            this.selectedProfil = 0;
         }
     }
 
@@ -88,25 +82,10 @@ public class CraftUser {
      * @param _name
      */
     public void setLoadedProfil(String _name){
-        if(this.loadedProfil == null){
-            CraftProfil profil = getProfil(_name);
-            if(profil == null){
-                return;
-            }
-            this.profils.remove(profil);
-            this.loadedProfil = profil;
-        }
-        else if (this.loadedProfil.getName().equals(_name)){
-            return;
-        }
-        else{
-            this.getProfils().add(this.loadedProfil);
-            CraftProfil profil = getProfil(_name);
-            if(profil == null){
-                return;
-            }
-            this.profils.remove(profil);
-            this.loadedProfil = profil;
+        try{
+            this.selectedProfil = this.profils.indexOf(this.getProfil(_name));
+        } catch (Exception e) {
+            this.selectedProfil = 0;
         }
     }
 
@@ -122,16 +101,6 @@ public class CraftUser {
             }
         }
         return null;
-    }
-
-    /**
-     * remove actual profil
-     */
-    public void removeLoadedProfil(){
-        if(this.getLoadedProfil() != null){
-            this.getProfils().add(this.getLoadedProfil());
-            this.loadedProfil = null;
-        }
     }
 
     /**

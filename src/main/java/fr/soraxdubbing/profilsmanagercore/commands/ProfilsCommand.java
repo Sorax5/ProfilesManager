@@ -46,24 +46,24 @@ public class ProfilsCommand {
             // Next item
             gui.setItem(6, 7, ItemBuilder.from(Material.PAPER).setName("Next").asGuiItem(event -> gui.next()));
 
-            if (user.getLoadedProfil() != null) {
-                ItemStack item = CreateItemProfils(user.getLoadedProfil(), gui);
-                GuiItem guiItem = ItemBuilder.from(item).asGuiItem();
-                gui.addItem(guiItem);
-            }
-
             if (user.getProfils().size() > 0) {
                 for (CraftProfil profil : user.getProfils()) {
                     ItemStack item = CreateItemProfils(profil, gui);
+                    GuiItem guiItem = null;
+                    if(profil != user.getLoadedProfil()){
+                        guiItem = ItemBuilder.from(item).asGuiItem(event -> {
+                            user.getLoadedProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
 
-                    GuiItem guiItem = ItemBuilder.from(item).asGuiItem(event -> {
-                        user.getLoadedProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
-                        user.setLoadedProfil(profil);
-                        user.getLoadedProfil().LoadingProfil(player, ProfilsManagerCore.getInstance());
-                        player.sendMessage("[ProfilsManagerCore]§a Profil " + user.getLoadedProfil().getName() + " chargé.");
-                        gui.open(player);
-                    });
+                            user.setLoadedProfil(profil.getName());
+                            user.getLoadedProfil().LoadingProfil(player, ProfilsManagerCore.getInstance());
 
+                            player.sendMessage("[ProfilsManagerCore]§a Profil " + user.getLoadedProfil().getName() + " chargé.");
+                            gui.close(player);
+                        });
+                    }
+                    else {
+                        guiItem = ItemBuilder.from(item).asGuiItem();
+                    }
                     gui.addItem(guiItem);
                 }
             }

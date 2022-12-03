@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class CraftProfil {
-    private transient List<AddonData> addons;
+    private List<AddonData> addons;
     private String name;
     private final String date;
 
@@ -24,7 +24,7 @@ public class CraftProfil {
     public CraftProfil(CraftProfil profil, String name) {
         this.name = name;
         this.date = LocalDate.now().toString();
-        this.addons = profil.getAddons();
+        this.addons = new ArrayList<>();
     }
 
     public String getName() {

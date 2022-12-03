@@ -2,7 +2,6 @@ package fr.soraxdubbing.profilsmanagercore.manager;
 
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
-import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
 import org.bukkit.entity.Player;
 
 import java.io.File;
@@ -45,7 +44,7 @@ public class UsersManager {
             this.registerUser(player);
         }
         for (CraftUser user : users) {
-            if (user.getPlayerUuid().equals(player.getUniqueId())) {
+            if (user.getUniqueId().equals(player.getUniqueId())) {
                 return user;
             }
         }
@@ -60,7 +59,7 @@ public class UsersManager {
     public boolean hasUser(UUID uuid) {
         boolean has = false;
         for (CraftUser user : users) {
-            if (user.getPlayerUuid().equals(uuid)) {
+            if (user.getUniqueId().equals(uuid)) {
                 has = true;
             }
         }
@@ -74,25 +73,14 @@ public class UsersManager {
     public void registerUser(Player player) {
         if(!hasUser(player.getUniqueId())) {
             CraftUser user = new CraftUser(player.getUniqueId());
-            CraftProfil profile = new CraftProfil("default");
-            profile.UpdateProfil(player, ProfilsManagerCore.getInstance());
-            user.setLoadedProfil(profile);
+            user.getLoadedProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
             this.users.add(user);
         }
     }
 
     /**
-     * unregister a user
-     * @param player the user to unregister
+     * load the users
      */
-    public void unregisterUser(Player player) {
-        if(hasUser(player.getUniqueId())) {
-            CraftUser user = getUser(player);
-            this.users.remove(user);
-            player.kickPlayer("§cVotre profil a été supprimé");
-        }
-    }
-
     public void loadFileUsers() {
         this.users.clear();
         File userFile = new File(this.path);
@@ -110,10 +98,29 @@ public class UsersManager {
         }
     }
 
+    /**
+     * save all the users
+     */
     public void saveFileUsers() {
         for (CraftUser user : users) {
             dataManager.save(user);
         }
+    }
+
+    /**
+     * register a class
+     * @param data the class to register
+     */
+    public void registerClass(Class data) {
+        dataManager.registerClass(data);
+    }
+
+    /**
+     * unregister a class
+     * @param data the class to unregister
+     */
+    public void unRegisterClass(Class data) {
+        dataManager.unRegisterClass(data);
     }
 
     /**

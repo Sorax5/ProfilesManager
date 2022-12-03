@@ -8,12 +8,12 @@ import org.bukkit.entity.Player;
 
 public class ProfilSetterCommand {
     @Command(
-            aliases = "set",
+            aliases = "name",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
-            perms = "pmc.profil.set",
+            perms = "pmc.profil.set.name",
             usage = "[name]"
     )
-    public void set(@Sender Player player , String name) {
+    public void name(@Sender Player player , String name) {
         try{
             CraftUser user = UsersManager.getInstance().getUser(player);
             user.getLoadedProfil().setName(name);

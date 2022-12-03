@@ -21,7 +21,7 @@ public final class ProfilsManagerCore extends JavaPlugin {
     public void onEnable() {
         int pluginId = 15930;
         Metrics metrics = new Metrics(this, pluginId);
-
+        UsersManager.getInstance().loadFileUsers();
         this.getServer().getPluginManager().registerEvents(new PlayerHandlerEvent(), this);
     }
 
@@ -60,7 +60,7 @@ public final class ProfilsManagerCore extends JavaPlugin {
         get.registerCommands(new ProfilGetterCommand());
 
         DispatcherNode set = profil.registerNode("set");
-        set.registerCommands(new ProfilSetterCommand());
+        profil.registerCommands(new ProfilSetterCommand());
 
         // PROFILS COMMANDS
         cmdGraph.getRootDispatcherNode().registerCommands(new ProfilsCommand());
@@ -70,7 +70,6 @@ public final class ProfilsManagerCore extends JavaPlugin {
 
         // LOAD USERS
         getLogger().info("Chargement des utilisateurs...");
-        UsersManager.getInstance().loadFileUsers();
     }
 
 

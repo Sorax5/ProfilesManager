@@ -5,13 +5,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import fr.soraxdubbing.profilsmanagercore.Addon.AddonData;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
-import java.nio.file.FileStore;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -58,7 +56,7 @@ public class JsonManager extends DataManager {
 
     @Override
     public void save(CraftUser user) {
-        File file = new File(getFolderPath() + File.separator + user.getPlayerUuid().toString() + ".json");
+        File file = new File(getFolderPath() + File.separator + user.getUniqueId().toString() + ".json");
 
         try(PrintWriter printWriter = new PrintWriter(file)) {
             String json = this.gson.toJson(user,CraftUser.class);
@@ -69,14 +67,14 @@ public class JsonManager extends DataManager {
         }
     }
 
-    public void registerClass(AddonData addon){
-        this.list.add(addon.getClass());
+    public void registerClass(Class data){
+        this.list.add(data);
         reload();
     }
 
-    public void unRegisterClass(AddonData addon){
-        if(this.list.contains(addon.getClass())){
-            this.list.remove(addon.getClass());
+    public void unRegisterClass(Class data){
+        if(this.list.contains(data)){
+            this.list.remove(data);
             reload();
         }
     }
