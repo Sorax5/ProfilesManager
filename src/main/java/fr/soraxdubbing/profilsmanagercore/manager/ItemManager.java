@@ -1,4 +1,4 @@
-package fr.soraxdubbing.profilsmanagercore.Manager;
+package fr.soraxdubbing.profilsmanagercore.manager;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;

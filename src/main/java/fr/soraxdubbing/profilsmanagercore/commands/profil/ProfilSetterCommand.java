@@ -3,20 +3,20 @@ package fr.soraxdubbing.profilsmanagercore.commands.profil;
 import app.ashcon.intake.Command;
 import app.ashcon.intake.bukkit.parametric.annotation.Sender;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
+import fr.soraxdubbing.profilsmanagercore.manager.UsersManager;
 import org.bukkit.entity.Player;
 
 public class ProfilSetterCommand {
     @Command(
-            aliases = "s",
+            aliases = "name",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
-            perms = "pmc.profil.set",
+            perms = "pmc.profil.set.name",
             usage = "[name]"
     )
-    public void set(@Sender Player player , String name) {
+    public void name(@Sender Player player , String name) {
         try{
-            CraftUser user = ProfilsManagerCore.getInstance().getUser(player.getUniqueId());
-            user.getActualProfil().setName(name);
+            CraftUser user = UsersManager.getInstance().getUser(player);
+            user.getLoadedProfil().setName(name);
             player.sendMessage("§aLe nom du profil a été changé en " + name);
         }
         catch (Exception e){

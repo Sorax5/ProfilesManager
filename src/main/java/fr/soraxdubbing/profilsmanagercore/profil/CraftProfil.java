@@ -1,22 +1,17 @@
 package fr.soraxdubbing.profilsmanagercore.profil;
 
 import fr.soraxdubbing.profilsmanagercore.Addon.AddonData;
-import fr.soraxdubbing.profilsmanagercore.Manager.ItemManager;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
-import fr.soraxdubbing.profilsmanagercore.event.ProfilLoadedEvent;
-import fr.soraxdubbing.profilsmanagercore.event.ProfilUpdateEvent;
+import fr.soraxdubbing.profilsmanagercore.API.ProfilLoadedEvent;
+import fr.soraxdubbing.profilsmanagercore.API.ProfilUpdateEvent;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.time.LocalDate;
 import java.util.*;
 
 public class CraftProfil {
-    private transient List<AddonData> addons;
+    private List<AddonData> addons;
     private String name;
     private final String date;
 
@@ -29,7 +24,7 @@ public class CraftProfil {
     public CraftProfil(CraftProfil profil, String name) {
         this.name = name;
         this.date = LocalDate.now().toString();
-        this.addons = profil.getAddons();
+        this.addons = new ArrayList<>();
     }
 
     public String getName() {

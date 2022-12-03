@@ -7,6 +7,7 @@ import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.PaginatedGui;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
+import fr.soraxdubbing.profilsmanagercore.manager.UsersManager;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
 import net.kyori.adventure.text.Component;
@@ -21,15 +22,15 @@ import java.util.Collections;
 public class ProfilsCommand {
 
     @Command(
-            aliases = "ps",
+            aliases = "profils",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.profils",
             usage = ""
     )
     public void profils(@Sender Player player) {
         try{
-            CraftUser user = ProfilsManagerCore.getInstance().getUser(player.getUniqueId());
-            user.getActualProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
+            CraftUser user = UsersManager.getInstance().getUser(player);
+            user.getLoadedProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
 
             PaginatedGui gui = Gui.paginated()
                     .title(Component.text("§6Profil"))
@@ -45,23 +46,24 @@ public class ProfilsCommand {
             // Next item
             gui.setItem(6, 7, ItemBuilder.from(Material.PAPER).setName("Next").asGuiItem(event -> gui.next()));
 
-            if (user.getActualProfil() != null) {
-                ItemStack item = CreateItemProfils(user.getActualProfil(), gui);
-                GuiItem guiItem = ItemBuilder.from(item).asGuiItem();
-                gui.addItem(guiItem);
-            }
-
             if (user.getProfils().size() > 0) {
                 for (CraftProfil profil : user.getProfils()) {
                     ItemStack item = CreateItemProfils(profil, gui);
+                    GuiItem guiItem = null;
+                    if(profil != user.getLoadedProfil()){
+                        guiItem = ItemBuilder.from(item).asGuiItem(event -> {
+                            user.getLoadedProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
 
-                    GuiItem guiItem = ItemBuilder.from(item).asGuiItem(event -> {
-                        user.getActualProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
-                        user.setActualProfil(profil);
-                        user.getActualProfil().LoadingProfil(player, ProfilsManagerCore.getInstance());
-                        player.sendMessage("[ProfilsManagerCore]§a Profil " + user.getActualProfil().getName() + " chargé.");
-                    });
+                            user.setLoadedProfil(profil.getName());
+                            user.getLoadedProfil().LoadingProfil(player, ProfilsManagerCore.getInstance());
 
+                            player.sendMessage("[ProfilsManagerCore]§a Profil " + user.getLoadedProfil().getName() + " chargé.");
+                            gui.close(player);
+                        });
+                    }
+                    else {
+                        guiItem = ItemBuilder.from(item).asGuiItem();
+                    }
                     gui.addItem(guiItem);
                 }
             }
@@ -75,6 +77,7 @@ public class ProfilsCommand {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        player.sendMessage("[ProfilsManagerCore] §aProfils chargé.");
 
     }
 

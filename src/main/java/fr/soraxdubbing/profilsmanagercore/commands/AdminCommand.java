@@ -3,19 +3,19 @@ package fr.soraxdubbing.profilsmanagercore.commands;
 import app.ashcon.intake.Command;
 import app.ashcon.intake.bukkit.parametric.annotation.Sender;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
+import fr.soraxdubbing.profilsmanagercore.manager.UsersManager;
 import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
 import org.bukkit.entity.Player;
 
 public class AdminCommand {
     @Command(
-            aliases = "s",
+            aliases = "save",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.save",
             usage = "[player] [name]"
     )
     public void save(@Sender Player player, Player target, String name) {
-        CraftUser user = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
+        CraftUser user = UsersManager.getInstance().getUser(target);
 
         if(user == null){
             player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
@@ -23,61 +23,52 @@ public class AdminCommand {
         }
 
         player.sendMessage("§aLe profil " + name + " a été sauvegardé");
-        // faire le serialize de l'objet profil
+
+        UsersManager.getInstance().saveFileUsers();
     }
 
-    @Command(
-            aliases = "l",
+    /*@Command(
+            aliases = "load",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.load",
             usage = "[player] [name]"
     )
     public void load(@Sender Player player, Player target, String name) {
-        CraftUser user = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
+        try{
+            CraftUser user = ProfilsManagerCore.getInstance().getLoader().load(target.getUniqueId());
 
-        if(user == null){
-            player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
+        } catch (Exception e) {
+            player.sendMessage("§cErreur : §fLe profil n'existe pas !");
             return;
         }
 
-        player.sendMessage("§aProfil " + name + " chargé");
-        // faire le deserialize de l'objet profil
-    }
+
+    }*/
 
     @Command(
-            aliases = "a",
+            aliases = "add",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.add",
             usage = "[player] [name]"
     )
     public void add(@Sender Player player, Player target, String name) {
         CraftProfil profil = new CraftProfil(name);
-        CraftUser user = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
-
-        if(user == null){
-            player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
-            return;
-        }
+        CraftUser user = UsersManager.getInstance().getUser(target);
 
         user.addProfils(profil);
         player.sendMessage("§aProfil " + name + " ajouté");
     }
 
     @Command(
-            aliases = "r",
+            aliases = "remove",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.remove",
             usage = "[player] [name]"
     )
     public void remove(@Sender Player player, Player target, String name) {
-        CraftUser user = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
+        CraftUser user = UsersManager.getInstance().getUser(target);
 
-        if(user == null){
-            player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
-            return;
-        }
-
-        CraftProfil profil = user.getProfilByName(name);
+        CraftProfil profil = user.getProfil(name);
         if(profil == null){
             player.sendMessage("§cErreur : §fLe profil n'existe pas !");
             return;
@@ -88,21 +79,16 @@ public class AdminCommand {
     }
 
     @Command(
-            aliases = "c",
+            aliases = "copy",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.copy",
             usage = "[player origin] [player target] [name]"
     )
     public void copy(@Sender Player player, Player origin, Player target , String name) {
-        CraftUser userOrigin = ProfilsManagerCore.getInstance().getUser(origin.getUniqueId());
-        CraftUser userTarget = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
+        CraftUser userOrigin = UsersManager.getInstance().getUser(origin);
+        CraftUser userTarget = UsersManager.getInstance().getUser(target);
 
-        if(userOrigin == null || userTarget == null){
-            player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
-            return;
-        }
-
-        CraftProfil profil = userOrigin.getProfilByName(name);
+        CraftProfil profil = userOrigin.getProfil(name);
         if(profil == null){
             player.sendMessage("§cErreur : §fLe profil n'existe pas !");
             return;
@@ -113,21 +99,16 @@ public class AdminCommand {
     }
 
     @Command(
-            aliases = "t",
+            aliases = "transfer",
             desc = "Commande d'administration du plugin ProfilsManagerCore",
             perms = "pmc.admin.transfer",
             usage = "[player origin] [player target] [name]"
     )
     public void transfer(@Sender Player player, Player origin, Player target , String name) {
-        CraftUser userOrigin = ProfilsManagerCore.getInstance().getUser(origin.getUniqueId());
-        CraftUser userTarget = ProfilsManagerCore.getInstance().getUser(target.getUniqueId());
+        CraftUser userOrigin = UsersManager.getInstance().getUser(origin);
+        CraftUser userTarget = UsersManager.getInstance().getUser(target);
 
-        if(userOrigin == null || userTarget == null){
-            player.sendMessage("§cErreur : §fLe joueur n'est pas enregistré !");
-            return;
-        }
-
-        CraftProfil profil = userOrigin.getProfilByName(name);
+        CraftProfil profil = userOrigin.getProfil(name);
         if(profil == null){
             player.sendMessage("§cErreur : §fLe profil n'existe pas !");
             return;
