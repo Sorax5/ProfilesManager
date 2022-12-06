@@ -21,6 +21,8 @@ I plan later to port the plugins to a newer version of minecraft (1.12.2 --> 1.1
 [![](https://bstats.org/signatures/bukkit/ProfilsManagerCore.svg)](https://bstats.org/plugin/bukkit/ProfilsManagerCore/15930)
 
 ## Official Addon
+The recent refactoring of the project has led to the incompatibility of the addons with version 2.0.
+I plan to update them soon, it will be done when this message is removed from the README.
 ### ProfilsPlayerStatistics
 https://github.com/Sorax5/ProfilsPlayerStatistics
 ### ProfilsVaultIntegration
@@ -40,6 +42,7 @@ Work in progress
 ```
 
 ### Exemple
+
 
 #### Create an Addon
 
