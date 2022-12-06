@@ -17,7 +17,9 @@
 package fr.soraxdubbing.profilsmanagercore.manager;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -236,8 +238,15 @@ public final class RuntimeTypeAdapterFactory<T> implements TypeAdapterFactory {
                 @SuppressWarnings("unchecked") // registration requires that subtype extends T
                 TypeAdapter<R> delegate = (TypeAdapter<R>) labelToDelegate.get(label);
                 if (delegate == null) {
-                    throw new JsonParseException("cannot deserialize " + baseType + " subtype named "
-                            + label + "; did you forget to register a subtype?");
+                    return null;
+                    /*if (labelsToIgnore.contains(label)) {
+                        return null;
+                    }
+                    else {
+                        return null;
+                        throw new JsonParseException("cannot deserialize " + baseType + " subtype named "
+                                + label + "; did you forget to register a subtype?");
+                    }*/
                 }
                 return delegate.fromJsonTree(jsonElement);
             }

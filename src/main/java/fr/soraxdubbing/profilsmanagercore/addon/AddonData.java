@@ -1,4 +1,4 @@
-package fr.soraxdubbing.profilsmanagercore.Addon;
+package fr.soraxdubbing.profilsmanagercore.addon;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;

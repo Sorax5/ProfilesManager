@@ -52,7 +52,7 @@ public class AdminCommand {
             usage = "[player] [name]"
     )
     public void add(@Sender Player player, Player target, String name) {
-        CraftProfil profil = new CraftProfil(name);
+        CraftProfil profil = UsersManager.getInstance().CreateProfil(name);
         CraftUser user = UsersManager.getInstance().getUser(target);
 
         user.addProfils(profil);

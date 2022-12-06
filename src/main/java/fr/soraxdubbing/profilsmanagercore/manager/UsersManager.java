@@ -2,6 +2,8 @@ package fr.soraxdubbing.profilsmanagercore.manager;
 
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
+import fr.soraxdubbing.profilsmanagercore.addon.AddonData;
+import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
 import org.bukkit.entity.Player;
 
 import java.io.File;
@@ -15,12 +17,14 @@ public class UsersManager {
     private List<CraftUser> users;
     private DataManager dataManager;
     private String path;
+    private List<Class<AddonData>> addonClass;
 
     private UsersManager() {
         instance = this;
         this.path = ProfilsManagerCore.getInstance().getDataFolder().getAbsolutePath() + "/users";
         users = new ArrayList<>();
-        this.dataManager = new JsonManager(this.path);
+        addonClass = new ArrayList<>();
+        this.dataManager = new JsonManager(this.path, addonClass);
     }
 
     /**
@@ -40,42 +44,12 @@ public class UsersManager {
      * @return the user
      */
     public CraftUser getUser(Player player) {
-        if(!hasUser(player.getUniqueId())) {
-            this.registerUser(player);
-        }
         for (CraftUser user : users) {
             if (user.getUniqueId().equals(player.getUniqueId())) {
                 return user;
             }
         }
         return null;
-    }
-
-    /**
-     * verify if the user is loaded
-     * @param uuid the id of the user
-     * @return true if the user is loaded
-     */
-    public boolean hasUser(UUID uuid) {
-        boolean has = false;
-        for (CraftUser user : users) {
-            if (user.getUniqueId().equals(uuid)) {
-                has = true;
-            }
-        }
-        return has;
-    }
-
-    /**
-     * register a user
-     * @param player the player to register
-     */
-    public void registerUser(Player player) {
-        if(!hasUser(player.getUniqueId())) {
-            CraftUser user = new CraftUser(player.getUniqueId());
-            user.getLoadedProfil().UpdateProfil(player, ProfilsManagerCore.getInstance());
-            this.users.add(user);
-        }
     }
 
     /**
@@ -88,12 +62,24 @@ public class UsersManager {
             if (file.getName().endsWith(".json")) {
                 UUID uuid = UUID.fromString(file.getName().replace(".json", ""));
                 CraftUser user = dataManager.load(uuid);
-                if (user != null) {
-                    users.add(user);
-                }
-                else {
+                if (user == null) {
                     ProfilsManagerCore.getInstance().getLogger().warning("The user " + file.getName() + " is not loaded");
+                    user = new CraftUser(uuid);
                 }
+
+                for (Class<AddonData> aClass : this.addonClass) {
+                    for (CraftProfil profil : user.getProfils()) {
+                        if(!profil.hasAddon(aClass)){
+                            try{
+                                profil.addAddon(aClass.newInstance());
+                            }
+                            catch (InstantiationException | IllegalAccessException e){
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+                users.add(user);
             }
         }
     }
@@ -111,16 +97,20 @@ public class UsersManager {
      * register a class
      * @param data the class to register
      */
-    public void registerClass(Class data) {
-        dataManager.registerClass(data);
+    public void registerClass(Class<AddonData> data) {
+        this.addonClass.add(data);
+        this.dataManager.reload();
     }
 
     /**
      * unregister a class
      * @param data the class to unregister
      */
-    public void unRegisterClass(Class data) {
-        dataManager.unRegisterClass(data);
+    public void unRegisterClass(Class<AddonData> data) {
+        if(this.addonClass.contains(data)) {
+            this.addonClass.remove(data);
+        }
+        this.dataManager.reload();
     }
 
     /**
@@ -129,5 +119,25 @@ public class UsersManager {
      */
     public List<CraftUser> getUsers() {
         return new ArrayList<>(users);
+    }
+
+    /**
+     * Get the data class
+     * @return the data class
+     */
+    public List<Class<AddonData>> getAddonClass() {
+        return addonClass;
+    }
+
+    public CraftProfil CreateProfil(String name){
+        CraftProfil profil = UsersManager.getInstance().CreateProfil(name);
+        for (Class<AddonData> aClass : this.addonClass) {
+            try {
+                profil.addAddon(aClass.newInstance());
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return profil;
     }
 }

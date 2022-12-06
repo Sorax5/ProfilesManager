@@ -1,9 +1,8 @@
 package fr.soraxdubbing.profilsmanagercore.manager;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
-import fr.soraxdubbing.profilsmanagercore.Addon.AddonData;
+import com.google.gson.*;
+import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
+import fr.soraxdubbing.profilsmanagercore.addon.AddonData;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
 
 import java.io.File;
@@ -13,6 +12,7 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,15 +20,15 @@ public class JsonManager extends DataManager {
 
     private Gson gson;
 
-    private List<Class> list;
+    private List<Class<AddonData>> list;
 
-    public JsonManager(String folderPath) {
+    public JsonManager(String folderPath, List<Class<AddonData>> addonClass) {
         super(folderPath);
-        this.list = new ArrayList<Class>();
+        this.list = addonClass;
         reload();
     }
 
-    private void reload(){
+    public void reload(){
         RuntimeTypeAdapterFactory<AddonData> runtimeTypeAdapterFactory = RuntimeTypeAdapterFactory
                 .of(AddonData.class, "type");
 
@@ -47,12 +47,13 @@ public class JsonManager extends DataManager {
 
     @Override
     public CraftUser load(UUID uuid) {
+        CraftUser user = null;
         try(Reader reader = Files.newBufferedReader(Paths.get(getFolderPath() + "/" + uuid + ".json"))){
-            return gson.fromJson(reader, CraftUser.class);
-        }catch (IllegalStateException | JsonSyntaxException | IOException exception){
+            user = gson.fromJson(reader, CraftUser.class);
+        }catch (JsonSyntaxException | JsonIOException | IOException exception){
             exception.printStackTrace();
         }
-        return null;
+        return user;
     }
 
     @Override
@@ -65,18 +66,6 @@ public class JsonManager extends DataManager {
         }
         catch (Exception e){
             e.printStackTrace();
-        }
-    }
-
-    public void registerClass(Class data){
-        this.list.add(data);
-        reload();
-    }
-
-    public void unRegisterClass(Class data){
-        if(this.list.contains(data)){
-            this.list.remove(data);
-            reload();
         }
     }
 }

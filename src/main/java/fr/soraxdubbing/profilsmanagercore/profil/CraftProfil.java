@@ -1,6 +1,6 @@
 package fr.soraxdubbing.profilsmanagercore.profil;
 
-import fr.soraxdubbing.profilsmanagercore.Addon.AddonData;
+import fr.soraxdubbing.profilsmanagercore.addon.AddonData;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 import fr.soraxdubbing.profilsmanagercore.API.ProfilLoadedEvent;
 import fr.soraxdubbing.profilsmanagercore.API.ProfilUpdateEvent;
@@ -110,6 +110,15 @@ public class CraftProfil {
     public Boolean hasAddon(String addonName){
         for(AddonData addon : this.addons){
             if(addon.getAddonName().equals(addonName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasAddon(Class<AddonData> addonClass){
+        for(AddonData addon : this.addons){
+            if(addon.getClass().equals(addonClass)){
                 return true;
             }
         }
