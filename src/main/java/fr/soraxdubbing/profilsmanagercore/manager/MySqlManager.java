@@ -9,9 +9,7 @@ public class MySqlManager extends DataManager {
 
     private Connection connection;
 
-    public MySqlManager(String folderPath){
-        super(folderPath);
-
+    public MySqlManager(){
         try(Connection connection = DataSourceProvider.getOneDataSourceInstance().getConnection()){
             this.connection = connection;
             Statement statement = connection.createStatement();

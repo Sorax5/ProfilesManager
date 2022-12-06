@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,16 +16,19 @@ public class UsersManager {
 
     private static UsersManager instance;
     private List<CraftUser> users;
-    private DataManager dataManager;
     private String path;
     private List<Class<AddonData>> addonClass;
+    private HashMap<String,DataManager> dataManagers;
+    private String method;
 
     private UsersManager() {
         instance = this;
         this.path = ProfilsManagerCore.getInstance().getDataFolder().getAbsolutePath() + "/users";
         users = new ArrayList<>();
         addonClass = new ArrayList<>();
-        this.dataManager = new JsonManager(this.path, addonClass);
+        dataManagers = new HashMap<>();
+        this.registerDataManager("json", new JsonManager(this.path, addonClass));
+        this.method = ProfilsManagerCore.getInstance().getConfig().getString("method");
     }
 
     /**
@@ -57,6 +61,7 @@ public class UsersManager {
      */
     public void loadFileUsers() {
         this.users.clear();
+        DataManager dataManager = this.dataManagers.get(this.method);
         File userFile = new File(this.path);
         for (File file : userFile.listFiles()) {
             if (file.getName().endsWith(".json")) {
@@ -88,6 +93,7 @@ public class UsersManager {
      * save all the users
      */
     public void saveFileUsers() {
+        DataManager dataManager = this.dataManagers.get(this.method);
         for (CraftUser user : users) {
             dataManager.save(user);
         }
@@ -99,7 +105,7 @@ public class UsersManager {
      */
     public void registerClass(Class<AddonData> data) {
         this.addonClass.add(data);
-        this.dataManager.reload();
+        this.dataManagers.get(this.method).reload();
     }
 
     /**
@@ -110,7 +116,7 @@ public class UsersManager {
         if(this.addonClass.contains(data)) {
             this.addonClass.remove(data);
         }
-        this.dataManager.reload();
+        this.dataManagers.get(this.method).reload();
     }
 
     /**
@@ -139,5 +145,14 @@ public class UsersManager {
             }
         }
         return profil;
+    }
+
+    /**
+     * register a data manager
+     * @param name the name of the data manager
+     * @param dataManager the data manager
+     */
+    public void registerDataManager(String name,DataManager dataManager){
+        this.dataManagers.put(name,dataManager);
     }
 }

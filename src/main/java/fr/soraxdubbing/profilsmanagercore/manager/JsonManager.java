@@ -1,7 +1,6 @@
 package fr.soraxdubbing.profilsmanagercore.manager;
 
 import com.google.gson.*;
-import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 import fr.soraxdubbing.profilsmanagercore.addon.AddonData;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
 
@@ -11,19 +10,17 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 public class JsonManager extends DataManager {
 
     private Gson gson;
-
     private List<Class<AddonData>> list;
+    private String path;
 
     public JsonManager(String folderPath, List<Class<AddonData>> addonClass) {
-        super(folderPath);
+        this.path = folderPath;
         this.list = addonClass;
         reload();
     }
@@ -48,7 +45,7 @@ public class JsonManager extends DataManager {
     @Override
     public CraftUser load(UUID uuid) {
         CraftUser user = null;
-        try(Reader reader = Files.newBufferedReader(Paths.get(getFolderPath() + "/" + uuid + ".json"))){
+        try(Reader reader = Files.newBufferedReader(Paths.get(path + "/" + uuid + ".json"))){
             user = gson.fromJson(reader, CraftUser.class);
         }catch (JsonSyntaxException | JsonIOException | IOException exception){
             exception.printStackTrace();
@@ -58,7 +55,7 @@ public class JsonManager extends DataManager {
 
     @Override
     public void save(CraftUser user) {
-        File file = new File(getFolderPath() + File.separator + user.getUniqueId().toString() + ".json");
+        File file = new File(path + File.separator + user.getUniqueId().toString() + ".json");
 
         try(PrintWriter printWriter = new PrintWriter(file)) {
             String json = this.gson.toJson(user,CraftUser.class);
@@ -68,4 +65,6 @@ public class JsonManager extends DataManager {
             e.printStackTrace();
         }
     }
+
+
 }

@@ -2,6 +2,7 @@ name: ProfilsManagerCore
 version: '${project.version}'
 main: fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore
 authors: [ SoraxDubbing ]
+website: https://github.com/Sorax5/ProfilsManagerCore
 softdepend:
   - Essentials
   - Vault

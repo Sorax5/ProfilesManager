@@ -1,3 +1,6 @@
+method: json # json/MySql - You can register your own method with the API
+
+# If you use a database, you must configure the following
 database:
   host: localhost
   port: 3306
