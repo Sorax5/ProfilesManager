@@ -64,8 +64,10 @@ public class ProfilsCommand {
                     else {
                         guiItem = ItemBuilder.from(item).asGuiItem();
                     }
+
                     gui.addItem(guiItem);
                 }
+
             }
             gui.disableItemDrop();
             gui.disableItemTake();
@@ -77,8 +79,6 @@ public class ProfilsCommand {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        player.sendMessage("[ProfilsManagerCore] §aProfils chargé.");
-
     }
 
     public ItemStack CreateItemProfils(CraftProfil profil, PaginatedGui gui){

@@ -3,6 +3,7 @@ package fr.soraxdubbing.profilsmanagercore.manager;
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 import fr.soraxdubbing.profilsmanagercore.addon.AddonData;
+import fr.soraxdubbing.profilsmanagercore.manager.instance.JsonManager;
 import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
 import org.bukkit.entity.Player;
 
@@ -23,12 +24,13 @@ public class UsersManager {
 
     private UsersManager() {
         instance = this;
-        this.path = ProfilsManagerCore.getInstance().getDataFolder().getAbsolutePath() + "/users";
+        this.path = ProfilsManagerCore.getInstance().getDataFolder().getAbsolutePath() + File.separator + "users";
         users = new ArrayList<>();
         addonClass = new ArrayList<>();
         dataManagers = new HashMap<>();
         this.registerDataManager("json", new JsonManager(this.path, addonClass));
         this.method = ProfilsManagerCore.getInstance().getConfig().getString("method");
+        this.method = "json";
     }
 
     /**
@@ -54,6 +56,10 @@ public class UsersManager {
             }
         }
         return null;
+    }
+
+    public void addUser(CraftUser user) {
+        users.add(user);
     }
 
     /**
@@ -103,7 +109,7 @@ public class UsersManager {
      * register a class
      * @param data the class to register
      */
-    public void registerClass(Class<AddonData> data) {
+    public void registerClass(Class data) {
         this.addonClass.add(data);
         this.dataManagers.get(this.method).reload();
     }
@@ -112,7 +118,7 @@ public class UsersManager {
      * unregister a class
      * @param data the class to unregister
      */
-    public void unRegisterClass(Class<AddonData> data) {
+    public void unRegisterClass(Class data) {
         if(this.addonClass.contains(data)) {
             this.addonClass.remove(data);
         }
@@ -136,7 +142,7 @@ public class UsersManager {
     }
 
     public CraftProfil CreateProfil(String name){
-        CraftProfil profil = UsersManager.getInstance().CreateProfil(name);
+        CraftProfil profil = new CraftProfil(name);
         for (Class<AddonData> aClass : this.addonClass) {
             try {
                 profil.addAddon(aClass.newInstance());
@@ -146,6 +152,8 @@ public class UsersManager {
         }
         return profil;
     }
+
+
 
     /**
      * register a data manager

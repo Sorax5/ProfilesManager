@@ -1,22 +1,19 @@
-package fr.soraxdubbing.profilsmanagercore.manager;
+package fr.soraxdubbing.profilsmanagercore.manager.instance;
 
 import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
+import fr.soraxdubbing.profilsmanagercore.manager.DataManager;
+import fr.soraxdubbing.profilsmanagercore.manager.sql.DataSourceProvider;
 
 import java.sql.*;
 import java.util.UUID;
 
-public class MySqlManager extends DataManager {
+public class DatabaseManager extends DataManager {
 
     private Connection connection;
 
-    public MySqlManager(){
-        try(Connection connection = DataSourceProvider.getOneDataSourceInstance().getConnection()){
-            this.connection = connection;
-            Statement statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS users (uuid VARCHAR(36), user CraftUser)");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public DatabaseManager(){
+        // create table by CraftUser class
+        
     }
 
     @Override

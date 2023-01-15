@@ -46,7 +46,6 @@ public final class ProfilsManagerCore extends JavaPlugin {
         getLogger().info("Fichier de configuration créé !");
 
         // INTAKE FRAMEWORK
-
         getLogger().info("Enregistrement des commandes...");
         BasicBukkitCommandGraph cmdGraph = new BasicBukkitCommandGraph();
 
@@ -67,9 +66,6 @@ public final class ProfilsManagerCore extends JavaPlugin {
 
         BukkitIntake bukkitIntake = new BukkitIntake(this, cmdGraph);
         bukkitIntake.register();
-
-        // LOAD USERS
-        getLogger().info("Chargement des utilisateurs...");
     }
 
 

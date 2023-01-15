@@ -19,18 +19,11 @@ public class PlayerHandlerEvent implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerLoginEvent e){
         CraftUser user = UsersManager.getInstance().getUser(e.getPlayer());
+        if(user == null){
+            user = new CraftUser(e.getPlayer().getUniqueId());
+            UsersManager.getInstance().addUser(user);
+        }
         user.getLoadedProfil().LoadingProfil(e.getPlayer(),ProfilsManagerCore.getInstance());
-
-        /*if (!user.hasLoadedProfil() && user.getProfils().size() == 0){
-            CraftProfil profil = new CraftProfil("Default");
-            user.addProfils(profil);
-            user.setLoadedProfil(profil);
-            user.getLoadedProfil().UpdateProfil(e.getPlayer(),plugin);
-        }
-        else if (!user.hasLoadedProfil() && user.getProfils().size() > 0){
-            user.setLoadedProfil(user.getProfils().get(0));
-        }
-        user.getLoadedProfil().LoadingProfil(e.getPlayer(),plugin);*/
     }
 
     @EventHandler

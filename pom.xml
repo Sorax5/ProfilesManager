@@ -85,8 +85,8 @@
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
         <repository>
-            <id>ashcon.app</id>
-            <url>https://repo.ashcon.app/nexus/content/repositories/snapshots/</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
@@ -122,6 +122,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
             <version>2.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.Electroid</groupId>
+            <artifactId>intake</artifactId>
+            <version>491a0c520fd2c0c0caabaeef90d64e3b65f270dd</version>
         </dependency>
     </dependencies>
 
