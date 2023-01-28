@@ -75,8 +75,9 @@ public class CraftProfil {
         ProfilLoadedEvent event = new ProfilLoadedEvent(player,this);
         Bukkit.getPluginManager().callEvent(event);
 
+        this.getAddons().removeIf(Objects::isNull);
+
         for (AddonData addon : this.getAddons()) {
-            plugin.getLogger().info("Loading addon " + addon.getAddonName());
             addon.loadAddonData(player,plugin);
         }
     }
