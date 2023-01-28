@@ -18,18 +18,18 @@ ProfilsManagerCore is a Bukkit/Spigot/Paper minecraft plugin allowing players to
 When I will finish and pauffine the api I will publish some addon examples.
 I plan later to port the plugins to a newer version of minecraft (1.12.2 --> 1.16.5 --> 1.19.2).
 
+### BStats
 [![](https://bstats.org/signatures/bukkit/ProfilsManagerCore.svg)](https://bstats.org/plugin/bukkit/ProfilsManagerCore/15930)
 
 ## Official Addon
 The recent refactoring of the project has led to the incompatibility of the addons with version 2.0.
 I plan to update them soon, it will be done when this message is removed from the README.
-### ProfilsPlayerStatistics
+### ProfilsPlayerStatistics (WORK WITH V2.0)
 https://github.com/Sorax5/ProfilsPlayerStatistics
-### ProfilsVaultIntegration
+### ProfilsVaultIntegration (DO NOT WORK YET)
 https://github.com/Sorax5/ProfilsVaultIntegration
 
 ## API
-
 Work in progress
 ### Maven Artifact Package
 
@@ -42,8 +42,6 @@ Work in progress
 ```
 
 ### Exemple
-
-
 #### Create an Addon
 
 The addons allow you to save information according to the profiles, you have two functions that allow you to save and load the information of the addon if needed.
@@ -58,7 +56,7 @@ public class PlayerStats extends AddonData {
     
   // Constructor of the Class
   public PlayerStats(Player player) {
-        super("PlayerStat") // Addon name
+        super("PlayerStat"); // Addon name
         this.level = player.getLevel();
         this.life = player.getMaxLife();
         this.gamemode = player.getGamemode();
@@ -99,15 +97,10 @@ public class PlayerStats extends AddonData {
 You must specify to the API the class that implements the abstract class AddonData, otherwise the information of your addon will not be saved because the API does not recognize your addon.
 
 ```java
-public class RegisterAddon implements Listener {
-
-    @EventHandler
-    public void registerAddon(AddonRegisterEvent event){
-        if(!event.getData().containsClass(PlayerStats.class)){
-            event.registerAddon(PlayerStats.class);
-            System.out.println("Registering addon");
-        }
-    }
+@Override
+public void onLoad(){
+    // PlayerStats.class is your AddonData
+    UsersManager.getInstance().registerClass(PlayerStats.class);
 }
 ```
 
@@ -128,10 +121,6 @@ public static ItemStack[] StringListToItemStack(List<String> encodedObject)
 ### JavaDocs
 
 Work in progress
-
-## Demo
-
-Insert gif or link to demo
 
 ## Used By
 
