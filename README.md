@@ -130,3 +130,7 @@ Work in progress
 
 <a href="https://github.com/sorax5"><img src="https://avatars.githubusercontent.com/sorax5" title="sorax5" width="80" height="80"></a>
 
+## Artwork
+the logo was made by <a href="game-icons.net">game-icons.net</a> under the <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0 license</a>.
+
+
