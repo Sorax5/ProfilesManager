@@ -9,14 +9,11 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![](https://img.shields.io/bstats/servers/15930?label=bStats)](https://bstats.org/plugin/bukkit/ProfilsManagerCore/15930)
 [![](https://img.shields.io/github/stars/Sorax5/ProfilsManagerCore.svg?label=Stars&logo=github)](https://github.com/Sorax5/ProfilsManagerCore/stargazers)
-[![](https://img.shields.io/github/workflow/status/Sorax5/ProfilsManagerCore/Java%20CI%20with%20Maven)](https://img.shields.io/github/workflow/status/Sorax5/ProfilsManagerCore/Java%20CI%20with%20Maven)
 [![CodeFactor](https://www.codefactor.io/repository/github/sorax5/profilsmanagercore/badge)](https://www.codefactor.io/repository/github/sorax5/profilsmanagercore)
+![](https://img.shields.io/badge/environment-server-orangered?style=flat-square)
 </div>
 
 ProfilsManagerCore is a Bukkit/Spigot/Paper minecraft plugin allowing players to have multiple game profiles on the same server, goodbye second account and welcome to Profiles! Only this plugin is useless it's an API so it requires addons to be useful.
-
-When I will finish and pauffine the api I will publish some addon examples.
-I plan later to port the plugins to a newer version of minecraft (1.12.2 --> 1.16.5 --> 1.19.2).
 
 ### BStats
 [![](https://bstats.org/signatures/bukkit/ProfilsManagerCore.svg)](https://bstats.org/plugin/bukkit/ProfilsManagerCore/15930)
