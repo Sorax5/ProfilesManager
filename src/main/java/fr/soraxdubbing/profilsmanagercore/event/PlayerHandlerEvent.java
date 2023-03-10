@@ -1,13 +1,15 @@
 package fr.soraxdubbing.profilsmanagercore.event;
 
-import fr.soraxdubbing.profilsmanagercore.manager.UsersManager;
-import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
+import fr.soraxdubbing.profilsmanagercore.storage.UsersManager;
+import fr.soraxdubbing.profilsmanagercore.model.CraftUser;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
+
+/**
+ * Event called when a player join, quit, respawn or change world
+ */
 public class PlayerHandlerEvent implements Listener {
 
     private ProfilsManagerCore plugin;
@@ -52,12 +54,5 @@ public class PlayerHandlerEvent implements Listener {
         CraftUser user = UsersManager.getInstance().getUser(e.getPlayer());
         user.getLoadedProfil().UpdateProfil(e.getPlayer(),plugin);
         UsersManager.getInstance().saveFileUsers();
-    }
-
-    public void save() {
-        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
-            CraftUser user = UsersManager.getInstance().getUser(onlinePlayer);
-            user.getLoadedProfil().UpdateProfil(onlinePlayer, plugin);
-        }
     }
 }

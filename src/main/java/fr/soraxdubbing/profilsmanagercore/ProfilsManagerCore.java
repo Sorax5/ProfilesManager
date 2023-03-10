@@ -3,7 +3,7 @@ package fr.soraxdubbing.profilsmanagercore;
 import app.ashcon.intake.bukkit.BukkitIntake;
 import app.ashcon.intake.bukkit.graph.BasicBukkitCommandGraph;
 import app.ashcon.intake.fluent.DispatcherNode;
-import fr.soraxdubbing.profilsmanagercore.manager.UsersManager;
+import fr.soraxdubbing.profilsmanagercore.storage.UsersManager;
 import fr.soraxdubbing.profilsmanagercore.commands.AdminCommand;
 import fr.soraxdubbing.profilsmanagercore.commands.ProfilsCommand;
 import fr.soraxdubbing.profilsmanagercore.commands.profil.ProfilGetterCommand;
@@ -37,7 +37,6 @@ public final class ProfilsManagerCore extends JavaPlugin {
     public void onLoad() {
         INSTANCE = this;
 
-        // FILE
         getLogger().info("Création du fichier de configuration...");
         File userFile = new File(getDataFolder().getAbsolutePath() + "/users");
         this.getDataFolder().mkdir();
@@ -67,8 +66,6 @@ public final class ProfilsManagerCore extends JavaPlugin {
         BukkitIntake bukkitIntake = new BukkitIntake(this, cmdGraph);
         bukkitIntake.register();
     }
-
-
 
     /**
      * Get instance of ProfilsManagerCore

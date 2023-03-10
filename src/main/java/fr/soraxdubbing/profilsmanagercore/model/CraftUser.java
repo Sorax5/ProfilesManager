@@ -1,6 +1,6 @@
-package fr.soraxdubbing.profilsmanagercore.CraftUser;
+package fr.soraxdubbing.profilsmanagercore.model;
 
-import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
+import fr.soraxdubbing.profilsmanagercore.model.CraftProfil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package fr.soraxdubbing.profilsmanagercore.manager;
+package fr.soraxdubbing.profilsmanagercore.storage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;

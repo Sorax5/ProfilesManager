@@ -1,6 +1,6 @@
-package fr.soraxdubbing.profilsmanagercore.manager;
+package fr.soraxdubbing.profilsmanagercore.storage;
 
-import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
+import fr.soraxdubbing.profilsmanagercore.model.CraftUser;
 
 import java.util.UUID;
 

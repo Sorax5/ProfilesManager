@@ -1,4 +1,4 @@
-package fr.soraxdubbing.profilsmanagercore.manager.sql;
+package fr.soraxdubbing.profilsmanagercore.storage.sql;
 
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 import org.apache.commons.dbcp2.BasicDataSource;

@@ -1,8 +1,8 @@
-package fr.soraxdubbing.profilsmanagercore.manager.instance;
+package fr.soraxdubbing.profilsmanagercore.storage.instance;
 
-import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.manager.DataManager;
-import fr.soraxdubbing.profilsmanagercore.manager.sql.DataSourceProvider;
+import fr.soraxdubbing.profilsmanagercore.model.CraftUser;
+import fr.soraxdubbing.profilsmanagercore.storage.DataManager;
+import fr.soraxdubbing.profilsmanagercore.storage.sql.DataSourceProvider;
 
 import java.sql.*;
 import java.util.UUID;

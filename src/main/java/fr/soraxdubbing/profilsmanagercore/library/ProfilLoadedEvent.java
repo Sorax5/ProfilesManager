@@ -1,14 +1,17 @@
-package fr.soraxdubbing.profilsmanagercore.API;
+package fr.soraxdubbing.profilsmanagercore.library;
 
-import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
+import fr.soraxdubbing.profilsmanagercore.model.CraftProfil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class ProfilUpdateEvent extends Event {
+/**
+ * Event called when a profil is loaded
+ */
+public class ProfilLoadedEvent extends Event {
 
-    private Player target;
-    private CraftProfil profil;
+    private final Player target;
+    private final CraftProfil profil;
     private static final HandlerList HANDLERS = new HandlerList();
 
     public static HandlerList getHandlerList() {
@@ -20,16 +23,16 @@ public class ProfilUpdateEvent extends Event {
         return HANDLERS;
     }
 
-    public ProfilUpdateEvent(Player target,CraftProfil profil){
+    public ProfilLoadedEvent(Player target, CraftProfil profil){
         this.target = target;
         this.profil = profil;
     }
 
-    public CraftProfil getProfil(){
-        return this.profil;
-    }
-
     public Player getTarget(){
         return this.target;
+    }
+
+    public CraftProfil getProfil(){
+        return profil;
     }
 }

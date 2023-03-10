@@ -1,10 +1,9 @@
-package fr.soraxdubbing.profilsmanagercore.manager;
+package fr.soraxdubbing.profilsmanagercore.model;
 
-import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 import fr.soraxdubbing.profilsmanagercore.addon.AddonData;
-import fr.soraxdubbing.profilsmanagercore.manager.instance.JsonManager;
-import fr.soraxdubbing.profilsmanagercore.profil.CraftProfil;
+import fr.soraxdubbing.profilsmanagercore.storage.DataManager;
+import fr.soraxdubbing.profilsmanagercore.storage.instance.JsonManager;
 import org.bukkit.entity.Player;
 
 import java.io.File;
@@ -19,7 +18,7 @@ public class UsersManager {
     private List<CraftUser> users;
     private String path;
     private List<Class<AddonData>> addonClass;
-    private HashMap<String,DataManager> dataManagers;
+    private HashMap<String, DataManager> dataManagers;
     private String method;
 
     private UsersManager() {

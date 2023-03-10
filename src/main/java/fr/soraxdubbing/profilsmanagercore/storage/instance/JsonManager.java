@@ -1,10 +1,10 @@
-package fr.soraxdubbing.profilsmanagercore.manager.instance;
+package fr.soraxdubbing.profilsmanagercore.storage.instance;
 
 import com.google.gson.*;
 import fr.soraxdubbing.profilsmanagercore.addon.AddonData;
-import fr.soraxdubbing.profilsmanagercore.CraftUser.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.manager.DataManager;
-import fr.soraxdubbing.profilsmanagercore.manager.RuntimeTypeAdapterFactory;
+import fr.soraxdubbing.profilsmanagercore.model.CraftUser;
+import fr.soraxdubbing.profilsmanagercore.storage.DataManager;
+import fr.soraxdubbing.profilsmanagercore.storage.RuntimeTypeAdapterFactory;
 
 import java.io.File;
 import java.io.IOException;

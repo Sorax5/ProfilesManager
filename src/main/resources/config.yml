@@ -1,4 +1,5 @@
 method: json # json/database - You can register your own method with the API
+lang: en # en/fr - You can register your own language with the API
 
 # If you use a database, you must configure the following
 database:
