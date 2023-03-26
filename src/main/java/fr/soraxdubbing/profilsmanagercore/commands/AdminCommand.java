@@ -3,8 +3,8 @@ package fr.soraxdubbing.profilsmanagercore.commands;
 import app.ashcon.intake.Command;
 import app.ashcon.intake.bukkit.parametric.annotation.Sender;
 import fr.soraxdubbing.profilsmanagercore.model.CraftUser;
-import fr.soraxdubbing.profilsmanagercore.storage.UsersManager;
 import fr.soraxdubbing.profilsmanagercore.model.CraftProfil;
+import fr.soraxdubbing.profilsmanagercore.model.UsersManager;
 import org.bukkit.entity.Player;
 
 public class AdminCommand {

@@ -5,6 +5,7 @@ import fr.soraxdubbing.profilsmanagercore.storage.DataManager;
 import fr.soraxdubbing.profilsmanagercore.storage.sql.DataSourceProvider;
 
 import java.sql.*;
+import java.util.List;
 import java.util.UUID;
 
 public class DatabaseManager extends DataManager {
@@ -44,6 +45,11 @@ public class DatabaseManager extends DataManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<CraftUser> loadAll() {
+        return null;
     }
 
     @Override

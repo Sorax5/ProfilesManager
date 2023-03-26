@@ -1,8 +1,8 @@
 package fr.soraxdubbing.profilsmanagercore.event;
 
-import fr.soraxdubbing.profilsmanagercore.storage.UsersManager;
 import fr.soraxdubbing.profilsmanagercore.model.CraftUser;
 import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
+import fr.soraxdubbing.profilsmanagercore.model.UsersManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;

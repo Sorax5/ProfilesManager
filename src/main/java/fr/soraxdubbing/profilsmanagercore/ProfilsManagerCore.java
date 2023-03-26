@@ -3,12 +3,12 @@ package fr.soraxdubbing.profilsmanagercore;
 import app.ashcon.intake.bukkit.BukkitIntake;
 import app.ashcon.intake.bukkit.graph.BasicBukkitCommandGraph;
 import app.ashcon.intake.fluent.DispatcherNode;
-import fr.soraxdubbing.profilsmanagercore.storage.UsersManager;
 import fr.soraxdubbing.profilsmanagercore.commands.AdminCommand;
 import fr.soraxdubbing.profilsmanagercore.commands.ProfilsCommand;
 import fr.soraxdubbing.profilsmanagercore.commands.profil.ProfilGetterCommand;
 import fr.soraxdubbing.profilsmanagercore.commands.profil.ProfilSetterCommand;
 import fr.soraxdubbing.profilsmanagercore.event.PlayerHandlerEvent;
+import fr.soraxdubbing.profilsmanagercore.model.UsersManager;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,8 +21,8 @@ public final class ProfilsManagerCore extends JavaPlugin {
     public void onEnable() {
         int pluginId = 15930;
         Metrics metrics = new Metrics(this, pluginId);
-        UsersManager.getInstance().loadFileUsers();
         this.getServer().getPluginManager().registerEvents(new PlayerHandlerEvent(), this);
+        UsersManager.getInstance().loadFileUsers();
     }
 
     @Override

@@ -67,7 +67,7 @@ public class UsersManager {
     public void loadFileUsers() {
         this.users.clear();
         DataManager dataManager = this.dataManagers.get(this.method);
-        File userFile = new File(this.path);
+        /*File userFile = new File(this.path);
         for (File file : userFile.listFiles()) {
             if (file.getName().endsWith(".json")) {
                 UUID uuid = UUID.fromString(file.getName().replace(".json", ""));
@@ -91,7 +91,8 @@ public class UsersManager {
                 }
                 users.add(user);
             }
-        }
+        }*/
+        this.users.addAll(dataManager.loadAll());
     }
 
     /**

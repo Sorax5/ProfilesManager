@@ -1,6 +1,7 @@
 package fr.soraxdubbing.profilsmanagercore.storage.instance;
 
 import com.google.gson.*;
+import fr.soraxdubbing.profilsmanagercore.ProfilsManagerCore;
 import fr.soraxdubbing.profilsmanagercore.addon.AddonData;
 import fr.soraxdubbing.profilsmanagercore.model.CraftUser;
 import fr.soraxdubbing.profilsmanagercore.storage.DataManager;
@@ -12,6 +13,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,6 +68,29 @@ public class JsonManager extends DataManager {
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<CraftUser> loadAll() {
+        File folder = new File(path);
+        File[] files = folder.listFiles();
+        List<CraftUser> users = new ArrayList<>();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isFile()) {
+                    if (!file.getName().endsWith(".json")) {
+                        continue;
+                    }
+                    try (Reader reader = Files.newBufferedReader(Paths.get(file.getAbsolutePath()))) {
+                        users.add(gson.fromJson(reader, CraftUser.class));
+                        ProfilsManagerCore.getInstance().getLogger().info("User " + file.getName() + " loaded");
+                    } catch (JsonSyntaxException | JsonIOException | IOException exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+        }
+        return users;
     }
 
 
