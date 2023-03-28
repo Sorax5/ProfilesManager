@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Manager of the users
+ */
 public class UsersManager {
 
     private static UsersManager instance;
@@ -67,31 +70,6 @@ public class UsersManager {
     public void loadFileUsers() {
         this.users.clear();
         DataManager dataManager = this.dataManagers.get(this.method);
-        /*File userFile = new File(this.path);
-        for (File file : userFile.listFiles()) {
-            if (file.getName().endsWith(".json")) {
-                UUID uuid = UUID.fromString(file.getName().replace(".json", ""));
-                CraftUser user = dataManager.load(uuid);
-                if (user == null) {
-                    ProfilsManagerCore.getInstance().getLogger().warning("The user " + file.getName() + " is not loaded");
-                    user = new CraftUser(uuid);
-                }
-
-                for (Class<AddonData> aClass : this.addonClass) {
-                    for (CraftProfil profil : user.getProfils()) {
-                        if(!profil.hasAddon(aClass)){
-                            try{
-                                profil.addAddon(aClass.newInstance());
-                            }
-                            catch (InstantiationException | IllegalAccessException e){
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-                users.add(user);
-            }
-        }*/
         this.users.addAll(dataManager.loadAll());
     }
 

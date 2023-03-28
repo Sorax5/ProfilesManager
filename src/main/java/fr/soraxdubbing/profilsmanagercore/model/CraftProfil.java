@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * class that represent a profil
+ */
 public class CraftProfil {
     private List<AddonData> addons;
     private String name;
@@ -69,23 +72,22 @@ public class CraftProfil {
     }
 
     /**
-     * describe the profil & addons
+     * describe the profil and addons
      * @return the profil's description
      */
     @Override
     public String toString() {
         StringBuilder list = new StringBuilder();
-
         for (AddonData addon : this.addons) {
             list.append(addon.toString());
         }
-
         return list.toString();
     }
 
     /**
      * Update a player's profil
      * @param player the player to update
+     * @param plugin the plugin
      */
     public void UpdateProfil(Player player, ProfilsManagerCore plugin){
         ProfilUpdateEvent event = new ProfilUpdateEvent(player,this);
@@ -99,6 +101,7 @@ public class CraftProfil {
     /**
      * Load the player's profil in minecraft
      * @param player the player to load
+     * @param plugin the plugin
      */
     public void LoadingProfil(Player player, ProfilsManagerCore plugin){
         ProfilLoadedEvent event = new ProfilLoadedEvent(player,this);
@@ -116,7 +119,7 @@ public class CraftProfil {
      * @param addonsName the addon's name
      * @return the addon
      */
-    public AddonData getAddons(String addonsName){
+    public AddonData getAddon(String addonsName){
         AddonData addon = null;
         for(AddonData data : this.addons){
             if(data.getAddonName().equals(addonsName)){
@@ -148,6 +151,14 @@ public class CraftProfil {
      */
     public void removeAddon(AddonData addon){
         this.addons.remove(addon);
+    }
+
+    /**
+     * Remove an addon from the profil by name
+     * @param addonName the addon's name
+     */
+    public void removeAddon(String addonName){
+        this.addons.removeIf(addon -> addon.getAddonName().equals(addonName));
     }
 
     /**

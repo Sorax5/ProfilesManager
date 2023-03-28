@@ -14,6 +14,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
+/**
+ * Main class of ProfilsManagerCore
+ */
 public final class ProfilsManagerCore extends JavaPlugin {
     private static ProfilsManagerCore INSTANCE;
 

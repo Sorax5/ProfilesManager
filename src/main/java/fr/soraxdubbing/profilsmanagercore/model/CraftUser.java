@@ -14,7 +14,7 @@ public class CraftUser {
 
     /**
      * Constructor of CraftUser
-     * @param identifier
+     * @param identifier UUID
      */
     public CraftUser(UUID identifier){
         System.out.println("[ProfilsRoadToNincraft] Création de l'utilisateur " + identifier.toString());
@@ -34,7 +34,7 @@ public class CraftUser {
 
     /**
      * Get the list of profils of the user
-     * @return List<CraftProfil>
+     * @return list of CraftProfil
      */
     public List<CraftProfil> getProfils(){
         return this.profils;
@@ -50,7 +50,7 @@ public class CraftUser {
 
     /**
      * remove a profil to the user
-     * @param _profils
+     * @param _profils CraftProfil
      */
     public void removeProfils(CraftProfil _profils){ this.profils.remove(_profils);}
     public CraftProfil getLoadedProfil(){
@@ -59,7 +59,7 @@ public class CraftUser {
 
     /**
      * set a profil to the user
-     * @param _actualProfil
+     * @param _actualProfil CraftProfil
      */
     public void setLoadedProfil(CraftProfil _actualProfil){
         this.selectedProfil = this.profils.indexOf(_actualProfil);
@@ -79,7 +79,7 @@ public class CraftUser {
 
     /**
      * set a profil to the user
-     * @param _name
+     * @param _name String
      */
     public void setLoadedProfil(String _name){
         try{
@@ -91,7 +91,7 @@ public class CraftUser {
 
     /**
      * get a profil by his name
-     * @param _name
+     * @param _name String
      * @return CraftProfil
      */
     public CraftProfil getProfil(String _name){

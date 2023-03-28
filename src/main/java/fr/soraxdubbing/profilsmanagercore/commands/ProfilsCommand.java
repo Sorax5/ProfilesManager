@@ -81,6 +81,12 @@ public class ProfilsCommand {
         }
     }
 
+    /**
+     * Create an item for the gui
+     * @param profil the profil
+     * @param gui the gui
+     * @return the item
+     */
     public ItemStack CreateItemProfils(CraftProfil profil, PaginatedGui gui){
         ItemStack itemPaper = new ItemStack(Material.PAPER);
         ItemMeta Meta = itemPaper.getItemMeta();
