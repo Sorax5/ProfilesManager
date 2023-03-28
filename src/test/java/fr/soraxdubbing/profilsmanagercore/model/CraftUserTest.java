@@ -53,15 +53,8 @@ public class CraftUserTest extends TestCase {
         assertEquals(user.getLoadedProfil(), profil);
     }
 
-    public void testTestSetLoadedProfil() {
-    }
-
-    public void testTestSetLoadedProfil1() {
-    }
-
     public void testGetProfil() {
-    }
-
-    public void testClear() {
+        assertNotNull(user.getProfil("test"));
+        assertEquals(user.getProfil("test"), profil);
     }
 }

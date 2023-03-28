@@ -101,12 +101,4 @@ public class CraftUser {
         }
         return null;
     }
-
-    /**
-     * clear the list of profils
-     */
-    public void clear(){
-        this.profils.clear();
-    }
-
 }
