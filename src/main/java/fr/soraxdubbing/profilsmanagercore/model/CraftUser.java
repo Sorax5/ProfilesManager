@@ -17,7 +17,6 @@ public class CraftUser {
      * @param identifier UUID
      */
     public CraftUser(UUID identifier){
-        System.out.println("[ProfilsRoadToNincraft] Création de l'utilisateur " + identifier.toString());
         this.identifier = identifier;
         this.profils = new ArrayList<CraftProfil>();
         this.selectedProfil = 0;
