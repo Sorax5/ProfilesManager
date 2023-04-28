@@ -1,0 +1,3 @@
+name: ProfilesPlayerStatistics
+version: '${version}'
+main: fr.soraxdubbing.profilesplayerstatistics.ProfilesPlayerStatistics

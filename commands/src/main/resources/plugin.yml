@@ -1,0 +1,3 @@
+name: ProfilesManagerCommands
+version: '${version}'
+main: fr.soraxdubbing.profilesmanagercommands.ProfilesManagerCommands

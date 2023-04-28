@@ -1,0 +1,10 @@
+name: ProfilesManagerCore
+version: '${version}'
+main: fr.soraxdubbing.profilesmanagercore.ProfilesManagerCore
+authors: [ SoraxDubbing ]
+website: https://github.com/Sorax5/ProfilsManagerCore
+softdepend:
+  - Essentials
+  - Vault
+  - LuckPerms
+description:
