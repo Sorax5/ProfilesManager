@@ -22,7 +22,7 @@ ProfilsManager is a Bukkit/Spigot/Paper minecraft plugin allowing players to hav
 The recent refactoring of the project has led to the incompatibility of the addons with version 2.0.
 I plan to update them soon, it will be done when this message is removed from the README.
 ### ProfilsPlayerStatistics
-https://github.com/Sorax5/ProfilesManager/releases/download/V2.2.2/ProfilesPlayerStatistics-1.2-SNAPSHOT-all.jar
+https://modrinth.com/plugin/profilsplayerstatistics
 
 ## API
 Work in progress
