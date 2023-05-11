@@ -4,7 +4,7 @@ plugins{
 }
 
 group = 'fr.soraxdubbing.profilesmanagercore'
-version = '2.2.2-SNAPSHOT'
+version = '2.2.3-SNAPSHOT'
 
 dependencies {
     implementation("org.bstats:bstats-bukkit:3.0.0")

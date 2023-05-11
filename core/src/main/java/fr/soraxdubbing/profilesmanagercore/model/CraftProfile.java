@@ -109,10 +109,10 @@ public class CraftProfile {
      * @param plugin the plugin
      */
     public void LoadingProfil(Player player, ProfilesManagerCore plugin){
+        this.getAddons().removeIf(Objects::isNull);
+
         ProfileLoadedEvent event = new ProfileLoadedEvent(player,this);
         Bukkit.getPluginManager().callEvent(event);
-
-        this.getAddons().removeIf(Objects::isNull);
 
         for (AddonData addon : this.getAddons()) {
             addon.loadAddonData(player,plugin);
