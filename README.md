@@ -1,6 +1,6 @@
 <h1 align="center">
   <img width="248" height="248" src="https://raw.githubusercontent.com/Sorax5/ProfilsManagerCore/master/logo.png">
-  <br>ProfilsManagerCore</br>
+  <br>ProfilesManager</br>
 </h1>
 
 <div align="center">
@@ -13,19 +13,19 @@
 ![](https://img.shields.io/badge/environment-server-orangered?style=flat-square)
 </div>
 
-ProfilsManager is a Bukkit/Spigot/Paper minecraft plugin allowing players to have multiple game profiles on the same server, goodbye second account and welcome to Profiles! Only this plugin is useless it's an API so it requires addons to be useful.
+ProfilesManager is a Bukkit/Spigot/Paper minecraft plugin allowing players to have multiple game profiles on the same server, goodbye second account and welcome to Profiles! Only this plugin is useless it's an API so it requires addons to be useful.
 
 ### BStats
 [![](https://bstats.org/signatures/bukkit/ProfilsManagerCore.svg)](https://bstats.org/plugin/bukkit/ProfilsManagerCore/15930)
 
 ## Official Addon
-The recent refactoring of the project has led to the incompatibility of the addons with version 2.0.
-I plan to update them soon, it will be done when this message is removed from the README.
-### ProfilsPlayerStatistics
+### ProfilesPlayerStatistics
 https://modrinth.com/plugin/profilsplayerstatistics
 
+### ProfilesManagerCommands
+https://modrinth.com/plugin/profilesmanagercommands
+
 ## API
-Work in progress
 ### Maven Artifact Package
 
 ```xml
@@ -46,21 +46,18 @@ Work in progress
 ### Gradle Artifact Package
 
 ```kotlin
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
+repositories {
+	maven { url 'https://jitpack.io' }
+}
 ```
 
 ```kotlin
 dependencies {
-	        implementation 'com.github.Sorax5:ProfilesManager:Tag'
-	}
+	implementation 'com.github.Sorax5:ProfilesManager:Tag'
+}
 ```
 
-### Exemple
+### Exemples
 #### Create an Addon
 
 The addons allow you to save information according to the profiles, you have two functions that allow you to save and load the information of the addon if needed.
