@@ -25,34 +25,34 @@ public class PlayerHandlerEvent implements Listener {
             user = new CraftUser(e.getPlayer().getUniqueId());
             UsersManager.getInstance().addUser(user);
         }
-        user.getLoadedProfil().LoadingProfil(e.getPlayer(),ProfilesManagerCore.getInstance());
+        user.getLoadedProfil().LoadingProfile(e.getPlayer(),ProfilesManagerCore.getInstance());
     }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent e){
         CraftUser user = UsersManager.getInstance().getUser(e.getPlayer());
-        user.getLoadedProfil().UpdateProfil(e.getPlayer(),plugin);
-        user.getLoadedProfil().LoadingProfil(e.getPlayer(),plugin);
+        user.getLoadedProfil().UpdateProfile(e.getPlayer(),plugin);
+        user.getLoadedProfil().LoadingProfile(e.getPlayer(),plugin);
     }
 
     @EventHandler
     public void onPlayerChangeWorld(PlayerChangedWorldEvent e){
         CraftUser user = UsersManager.getInstance().getUser(e.getPlayer());
-        user.getLoadedProfil().UpdateProfil(e.getPlayer(),plugin);
-        user.getLoadedProfil().LoadingProfil(e.getPlayer(),plugin);
+        user.getLoadedProfil().UpdateProfile(e.getPlayer(),plugin);
+        user.getLoadedProfil().LoadingProfile(e.getPlayer(),plugin);
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e){
         CraftUser user = UsersManager.getInstance().getUser(e.getPlayer());
-        user.getLoadedProfil().UpdateProfil(e.getPlayer(),plugin);
+        user.getLoadedProfil().UpdateProfile(e.getPlayer(),plugin);
         UsersManager.getInstance().saveFileUsers();
     }
 
     @EventHandler
     public void onPlayerKick(PlayerKickEvent e){
         CraftUser user = UsersManager.getInstance().getUser(e.getPlayer());
-        user.getLoadedProfil().UpdateProfil(e.getPlayer(),plugin);
+        user.getLoadedProfil().UpdateProfile(e.getPlayer(),plugin);
         UsersManager.getInstance().saveFileUsers();
     }
 }

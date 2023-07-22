@@ -22,8 +22,8 @@ public class CraftProfile {
     private UUID uuid;
 
     /**
-     * Create a new profil
-     * @param name the profil's name
+     * Create a new profile
+     * @param name the profile's name
      */
     public CraftProfile(String name) {
         this.name = name;
@@ -33,52 +33,52 @@ public class CraftProfile {
     }
 
     /**
-     * Create a new profil by copy
-     * @param profil the profil to copy
-     * @param name the profil's name
+     * Create a new profile by copy
+     * @param profile the profile to copy
+     * @param name the profile's name
      */
-    public CraftProfile(CraftProfile profil, String name) {
+    public CraftProfile(CraftProfile profile, String name) {
         this.name = name;
         this.date = LocalDate.now().toString();
-        this.addons = profil.getAddons();
+        this.addons = profile.getAddons();
         this.uuid = UUID.randomUUID();
     }
 
     /**
-     * Get the profil's name
-     * @return the profil's name
+     * Get the profile's name
+     * @return the profile's name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Set the profil's name
-     * @param name the profil's name
+     * Set the profile's name
+     * @param name the profile's name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Get the creation date of the profil
-     * @return the creation date of the profil
+     * Get the creation date of the profile
+     * @return the creation date of the profile
      */
     public String getDate() {
         return date;
     }
 
     /**
-     * Get the creation date of the profil
-     * @return the creation date of the profil
+     * Get the creation date of the profile
+     * @return the creation date of the profile
      */
     public String getDateString(){
         return this.date;
     }
 
     /**
-     * describe the profil and addons
-     * @return the profil's description
+     * describe the profile and addons
+     * @return the profile's description
      */
     @Override
     public String toString() {
@@ -90,11 +90,11 @@ public class CraftProfile {
     }
 
     /**
-     * Update a player's profil
+     * Update a player's profile
      * @param player the player to update
      * @param plugin the plugin
      */
-    public void UpdateProfil(Player player, ProfilesManagerCore plugin){
+    public void UpdateProfile(Player player, ProfilesManagerCore plugin){
         ProfileUpdateEvent event = new ProfileUpdateEvent(player,this);
         Bukkit.getPluginManager().callEvent(event);
 
@@ -104,11 +104,11 @@ public class CraftProfile {
     }
 
     /**
-     * Load the player's profil in minecraft
+     * Load the player's profile in minecraft
      * @param player the player to load
      * @param plugin the plugin
      */
-    public void LoadingProfil(Player player, ProfilesManagerCore plugin){
+    public void LoadingProfile(Player player, ProfilesManagerCore plugin){
         this.getAddons().removeIf(Objects::isNull);
 
         ProfileLoadedEvent event = new ProfileLoadedEvent(player,this);
@@ -125,13 +125,7 @@ public class CraftProfile {
      * @return the addon
      */
     public AddonData getAddon(String addonsName){
-        AddonData addon = null;
-        for(AddonData data : this.addons){
-            if(data.getAddonName().equals(addonsName)){
-                addon = data;
-            }
-        }
-        return addon;
+        return this.addons.stream().filter(addon -> addon.getAddonName().equals(addonsName)).findFirst().orElse(null);
     }
 
     /**
@@ -143,7 +137,7 @@ public class CraftProfile {
     }
 
     /**
-     * Add an addon to the profil
+     * Add an addon to the profile
      * @param addon the addon to add
      */
     public void addAddon(AddonData addon){
@@ -151,7 +145,7 @@ public class CraftProfile {
     }
 
     /**
-     * Remove an addon from the profil
+     * Remove an addon from the profile
      * @param addon the addon to remove
      */
     public void removeAddon(AddonData addon){
@@ -159,7 +153,7 @@ public class CraftProfile {
     }
 
     /**
-     * Remove an addon from the profil by name
+     * Remove an addon from the profile by name
      * @param addonName the addon's name
      */
     public void removeAddon(String addonName){
@@ -167,36 +161,26 @@ public class CraftProfile {
     }
 
     /**
-     * verify if the profil has addon by name
+     * verify if the profile has addon by name
      * @param addonName the addon's name
-     * @return true if the profil has the addon
+     * @return true if the profile has the addon
      */
     public Boolean hasAddon(String addonName){
-        for(AddonData addon : this.addons){
-            if(addon.getAddonName().equals(addonName)){
-                return true;
-            }
-        }
-        return false;
+        return addons.stream().anyMatch(addon -> addon.getAddonName().equals(addonName));
     }
 
     /**
-     * verify if the profil has addon by class
+     * verify if the profile has addon by class
      * @param addonClass the addon's class
-     * @return true if the profil has the addon
+     * @return true if the profile has the addon
      */
     public boolean hasAddon(Class<AddonData> addonClass){
-        for(AddonData addon : this.addons){
-            if(addon.getClass().equals(addonClass)){
-                return true;
-            }
-        }
-        return false;
+        return addons.stream().anyMatch(addon -> addon.getClass().equals(addonClass));
     }
 
     /**
-     * Get the profil's uuid
-     * @return the profil's uuid
+     * Get the profile's uuid
+     * @return the profile's uuid
      */
     public UUID getUuid() {
         return uuid;

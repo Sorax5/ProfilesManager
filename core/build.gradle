@@ -1,28 +1,14 @@
 plugins{
-    id 'fr.il_totore.manadrop' version '0.4.3'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'fr.soraxdubbing.profilesmanagercore'
-version = '2.2.3-SNAPSHOT'
+version = '2.2.4-SNAPSHOT'
 
 dependencies {
     implementation("org.bstats:bstats-bukkit:3.0.0")
     implementation("com.google.code.gson:gson:2.9.0")
 }
-
-spigot {
-    desc {
-        named 'ProfilesManagerCore'
-        version project.version
-        authors 'SoraxDubbing'
-        main 'fr.soraxdubbing.profilesmanagercore.ProfilesManagerCore'
-        website 'https://github.com/Sorax5/ProfilsManagerCore'
-        description('Plugin permettant le multi-compte sur un serveur.')
-    }
-}
-
-processResources.finalizedBy(spigotPlugin)
 
 def targetJavaVersion = 8
 java {

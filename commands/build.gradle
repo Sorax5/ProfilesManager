@@ -24,17 +24,6 @@ tasks.withType(JavaCompile).configureEach {
     }
 }
 
-spigot {
-    desc {
-        named 'ProfilesManagerCommands'
-        version project.version
-        authors 'SoraxDubbing'
-        main 'fr.soraxdubbing.profilesmanagercommands.ProfilesManagerCommands'
-        website 'https://github.com/Sorax5/ProfilsManagerCore'
-        description('Dépendance du plugin ProfilesManagerCore rajoutant les commandes de base')
-    }
-}
-
 processResources {
     def props = [version: version]
     inputs.properties props

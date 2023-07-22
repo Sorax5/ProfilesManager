@@ -30,7 +30,7 @@ public class UserCommands {
     public void profiles(@Sender Player player) {
         try{
             CraftUser user = UsersManager.getInstance().getUser(player);
-            user.getLoadedProfil().UpdateProfil(player, ProfilesManagerCore.getInstance());
+            user.getLoadedProfil().UpdateProfile(player, ProfilesManagerCore.getInstance());
 
             PaginatedGui gui = Gui.paginated()
                     .title(Component.text("§6Profil"))
@@ -52,10 +52,10 @@ public class UserCommands {
                     GuiItem guiItem = null;
                     if(profil != user.getLoadedProfil()){
                         guiItem = ItemBuilder.from(item).asGuiItem(event -> {
-                            user.getLoadedProfil().UpdateProfil(player, ProfilesManagerCore.getInstance());
+                            user.getLoadedProfil().UpdateProfile(player, ProfilesManagerCore.getInstance());
 
                             user.setLoadedProfil(profil.getName());
-                            user.getLoadedProfil().LoadingProfil(player, ProfilesManagerCore.getInstance());
+                            user.getLoadedProfil().LoadingProfile(player, ProfilesManagerCore.getInstance());
 
                             player.sendMessage("[ProfilsManagerCore]§a Profil " + user.getLoadedProfil().getName() + " chargé.");
                             gui.close(player);

@@ -1,6 +1,5 @@
 plugins{
     id 'java'
-    id 'fr.il_totore.manadrop' version '0.4.3'
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
@@ -11,7 +10,6 @@ wrapper {
 
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'fr.il_totore.manadrop'
     apply plugin: 'com.github.johnrengelman.shadow'
 
     repositories {
